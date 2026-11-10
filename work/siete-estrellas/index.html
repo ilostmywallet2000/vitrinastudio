@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es" data-default="es">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Las 7 Estrellas · Restaurante ruso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Rubik:wght@400;500;600;700&display=swap">
+<style>
+/* A theatre of a dining room: velvet night, brass, one coral spotlight. The upside-down tower hangs over the hero. */
+:root{
+  --night:#15111F; --velvet:#221A33; --ivory:#F4EEE3; --muted:#B7AEC4; --brass:#CBA55E; --coral:#E8553E; --line:rgba(203,165,94,.28);
+  --f-d:"Yeseva One",Georgia,serif; --f-b:"Rubik",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--ivory);font:16.5px/1.6 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--f-d);font-weight:400;margin:0;line-height:1;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.w{max-width:1220px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.cap{font:600 12px/1 var(--f-b);letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:99px;font:600 15px/1 var(--f-b);text-decoration:none;border:1px solid var(--brass);color:var(--ivory);background:none;cursor:pointer;transition:background .2s,transform .2s}
+.btn:hover{transform:translateY(-2px);background:rgba(203,165,94,.12)}
+.btn.f{background:var(--coral);border-color:var(--coral);color:#fff}
+.btn.f:hover{background:#D2452F}
+header{position:absolute;inset:env(safe-area-inset-top,0px) 0 auto;z-index:5}
+.hd{display:flex;justify-content:space-between;align-items:center;padding-block:22px;gap:16px}
+.logo{font:400 22px/1 var(--f-d);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{font-style:normal;width:34px;height:34px;border:1px solid var(--brass);border-radius:50%;display:grid;place-items:center;color:var(--brass);font-size:17px}
+nav{display:flex;gap:28px;font-size:15px}nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--ivory)}
+.langs{display:flex;border:1px solid var(--line);border-radius:99px;padding:3px}
+.langs button{border:0;background:none;color:var(--muted);font:600 12px/1 var(--f-b);padding:7px 10px;border-radius:99px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--brass);color:var(--night)}
+@media (max-width:880px){nav{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:min(880px,100svh);display:flex;align-items:flex-end;overflow:hidden;background:radial-gradient(60% 55% at 72% 30%,rgba(232,85,62,.28),transparent 70%),radial-gradient(80% 60% at 20% 100%,var(--velvet),transparent 70%),var(--night)}
+.tower{position:absolute;top:0;right:9%;width:min(360px,46vw);height:auto;opacity:.95}
+@media (max-width:700px){.tower{right:-8%;opacity:.5}}
+.hero .w{position:relative;padding-block:140px 80px;width:100%}
+.hero h1{font-size:clamp(64px,11vw,170px);letter-spacing:-.01em;line-height:.9}
+.hero h1 em{font-style:normal;color:var(--coral)}
+.hero .lede{max-width:46ch;color:var(--muted);font-size:19px;margin-top:28px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.ticker{display:flex;gap:32px;margin-top:56px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.ticker b{display:block;font:400 30px/1 var(--f-d);color:var(--brass);margin-bottom:6px}
+
+section{padding-block:110px}
+@media (max-width:700px){section{padding-block:70px}}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:56px}
+.sh h2{font-size:clamp(42px,6vw,84px);max-width:12ch}
+.sh p{color:var(--muted);max-width:42ch}
+
+/* stars */
+.stars{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px}
+.wd{grid-column:span 4;background:var(--velvet);border:1px solid var(--line);border-radius:22px;padding:28px;display:flex;flex-direction:column;gap:12px;min-height:260px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
+.wd:hover{transform:translateY(-4px);border-color:var(--brass)}
+.wd.big{grid-column:span 8;background:radial-gradient(80% 90% at 90% 10%,rgba(232,85,62,.35),transparent 60%),var(--velvet)}
+@media (max-width:960px){.wd,.wd.big{grid-column:span 6}}
+@media (max-width:620px){.wd,.wd.big{grid-column:span 12;min-height:0}}
+.wd .ph{margin:-28px -28px 8px;height:190px;overflow:hidden;position:relative}
+.wd .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.wd:hover .ph img{transform:scale(1.05)}
+.wd .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,var(--velvet))}
+.wd.big .ph{height:260px}
+.wd .n{position:relative;margin-top:-56px;z-index:1;font:400 52px/1 var(--f-d);color:var(--brass)}
+.wd h3{font-size:30px}
+.wd .ru{color:var(--coral);font-size:14px;font-weight:500;letter-spacing:.04em}
+.wd p{color:var(--muted);font-size:15px;max-width:44ch}
+.wd .pr{margin-top:auto;font:400 24px/1 var(--f-d)}
+.wd.big h3{font-size:clamp(34px,4vw,48px)}
+
+/* banquets */
+.banq{background:var(--ivory);color:var(--night)}
+.banq .cap{color:#9A7533}
+.banq .sh p{color:#5C5468}
+.banqimg{width:100%;aspect-ratio:21/8;object-fit:cover;border-radius:22px;display:block;margin-bottom:22px}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:900px){.plans{grid-template-columns:1fr}}
+.plan{border:1px solid #DDD3C1;border-radius:22px;padding:30px;display:flex;flex-direction:column;gap:14px;background:#FBF8F2}
+.plan.hot{background:var(--night);color:var(--ivory);border-color:var(--night)}
+.plan h3{font-size:34px}
+.plan .pr{font:400 46px/1 var(--f-d);color:var(--coral)}
+.plan .pr small{font:500 14px/1 var(--f-b);color:inherit;opacity:.6}
+.plan ul{list-style:none;margin:0;padding:14px 0 0;border-top:1px solid #DDD3C1;display:flex;flex-direction:column;gap:8px;font-size:15px}
+.plan.hot ul{border-color:rgba(255,255,255,.15)}
+.plan li::before{content:"✦ ";color:var(--brass)}
+.calc{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;background:#FBF8F2;border:1px solid #DDD3C1;border-radius:22px;padding:20px 24px}
+.calc label{font-weight:600}
+.calc input[type=range]{width:min(320px,100%);accent-color:var(--coral)}
+.calc output{font:400 30px/1 var(--f-d);color:var(--coral);min-width:5ch}
+.calc .sm{color:#5C5468;font-size:14px}
+
+/* visit */
+.visit .w{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:56px;align-items:center}
+@media (max-width:860px){.visit .w{grid-template-columns:1fr;gap:36px}}
+.visit h2{font-size:clamp(42px,5.4vw,76px)}
+.info{display:grid;grid-template-columns:auto 1fr;gap:14px 30px;margin-top:30px}
+.info dt{color:var(--muted)}.info dd{margin:0;font-weight:500}
+.poster{aspect-ratio:3/4;border-radius:200px 200px 22px 22px;border:1px solid var(--brass);padding:16px;max-width:420px;justify-self:center;width:100%}
+.poster div{height:100%;border-radius:190px 190px 14px 14px;background:linear-gradient(rgba(21,17,31,.35),rgba(21,17,31,.92) 75%),url(photos/street.jpg) center/cover;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:30px}
+.poster b{font:400 92px/1 var(--f-d);color:var(--brass)}
+.poster span{font:400 26px/1.15 var(--f-d)}
+footer{border-top:1px solid var(--line);padding-block:26px;font-size:13px;color:var(--muted)}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.wd{transition:none}}
+
+.logo{white-space:nowrap}.logo i{flex:none}
+@media (max-width:560px){.logo{font-size:19px;gap:8px}.logo i{width:30px;height:30px;font-size:15px}}
+</style>
+</head>
+<body>
+<header><div class="w hd">
+  <a class="logo" href="#top"><i>7</i>Las 7 Estrellas</a>
+  <nav><a href="#estrellas" data-i="n1"></a><a href="#banquetes" data-i="n2"></a><a href="#visita" data-i="n3"></a></nav>
+  <div class="langs"><button data-l="es">ES</button><button data-l="en">EN</button><button data-l="ru">RU</button></div>
+</div></header>
+
+<main id="top">
+  <div class="hero">
+    <svg class="tower" viewBox="0 0 200 420" fill="none" stroke="#CBA55E" stroke-width="1.6" aria-hidden="true">
+      <!-- the tower hangs from the ceiling, tip down -->
+      <path d="M40 0 L100 400 L160 0"/><path d="M55 0 L100 300 L145 0" opacity=".6"/>
+      <path d="M48 40 H152 M60 110 H140 M72 180 H128 M84 250 H116"/>
+      <path d="M48 40 L140 110 M152 40 L60 110 M60 110 L128 180 M140 110 L72 180 M72 180 L116 250 M128 180 L84 250" opacity=".55"/>
+      <path d="M60 110 Q100 140 140 110" stroke="#E8553E" stroke-width="2.4"/>
+      <circle cx="100" cy="404" r="6" fill="#E8553E" stroke="none"/>
+      <path d="M100 410 V420" stroke="#E8553E"/>
+    </svg>
+    <div class="w">
+      <span class="cap" data-i="eyebrow"></span>
+      <h1 style="margin-top:20px">Las <em>7</em><br>Estrellas</h1>
+      <p class="lede" data-i="lede"></p>
+      <div class="ctas"><button class="btn f" type="button" onclick="document.querySelector('.gw-btn')?.click()" data-i="book"></button><a class="btn" href="#banquetes" data-i="party"></a></div>
+      <div class="ticker"><div><b>80</b><span>invitados por banquete</span></div><div><b>VII</b><span data-i="t2"></span></div><div><b>ES · EN · RU</b><span data-i="t3"></span></div></div>
+    </div>
+  </div>
+
+  <section id="estrellas"><div class="w">
+    <div class="sh"><div><span class="cap" data-i="mCap"></span><h2 style="margin-top:14px" data-i="mT"></h2></div><p data-i="mP"></p></div>
+    <div class="stars" id="stars"></div>
+  </div></section>
+
+  <section class="banq" id="banquetes"><div class="w">
+    <div class="sh"><div><span class="cap" data-i="bCap"></span><h2 style="margin-top:14px" data-i="bT"></h2></div><p data-i="bP"></p></div>
+    <img class="banqimg" src="photos/banquet.jpg" alt="" loading="lazy">
+    <div class="plans">
+      <article class="plan"><span class="cap" data-i="p1c"></span><h3 data-i="p1t"></h3><div class="pr">39 €<small data-i="pp"></small></div><ul><li data-i="p1a"></li><li data-i="p1b"></li><li data-i="p1d"></li></ul></article>
+      <article class="plan hot"><span class="cap" data-i="p2c"></span><h3 data-i="p2t"></h3><div class="pr">55 €<small data-i="pp"></small></div><ul><li data-i="p2a"></li><li data-i="p2b"></li><li data-i="p2d"></li></ul></article>
+      <article class="plan"><span class="cap" data-i="p3c"></span><h3 data-i="p3t"></h3><div class="pr">75 €<small data-i="pp"></small></div><ul><li data-i="p3a"></li><li data-i="p3b"></li><li data-i="p3d"></li></ul></article>
+    </div>
+    <div class="calc"><label for="g" data-i="cL"></label><input id="g" type="range" min="10" max="80" value="30"><span id="gn">30</span><span class="sm" data-i="cX"></span><output id="tot">1.650 €</output><span class="sm" data-i="cN"></span></div>
+  </div></section>
+
+  <section class="visit" id="visita"><div class="w">
+    <div>
+      <span class="cap" data-i="vCap"></span>
+      <h2 style="margin-top:14px" data-i="vT"></h2>
+      <dl class="info">
+        <dt data-i="iA"></dt><dd>Eixample · Barcelona</dd>
+        <dt>Metro</dt><dd data-i="iM"></dd>
+        <dt data-i="iH"></dt><dd data-i="iHv"></dd>
+        <dt data-i="iL"></dt><dd>Español · English · Русский</dd>
+      </dl>
+      <div class="ctas"><button class="btn f" type="button" onclick="document.querySelector('.gw-btn')?.click()" data-i="book"></button><a class="btn" href="#" target="_blank" rel="noopener" data-i="route"></a></div>
+    </div>
+    <div class="poster" aria-hidden="true"><div><b>7</b><span data-i="poster"></span><span class="cap" data-i="posterS"></span></div></div>
+  </div></section>
+</main>
+<footer><div class="w"><span>© Las 7 Estrellas · Concepto de Vitrina Studio</span><span data-i="foot"></span></div></footer>
+
+<script>
+window.T={
+ n1:{es:"Las estrellas",en:"The stars",ru:"Семь звёзд"},n2:{es:"Banquetes",en:"Banquets",ru:"Банкеты"},n3:{es:"Visítanos",en:"Visit",ru:"Адрес"},
+ eyebrow:{es:"Restaurante ruso · Eixample",en:"Russian restaurant · Eixample",ru:"Русский ресторан · Эшампле"},
+ lede:{es:"Cocina rusa de celebración: siete platos que son nuestra leyenda, una torre Eiffel colgando del techo y mesas largas para celebrar lo que haga falta.",en:"Russian food made for celebrating: seven dishes that made our name, an Eiffel Tower hanging from the ceiling, and long tables for whatever you're celebrating.",ru:"Русская праздничная кухня: семь блюд-легенд, Эйфелева башня под потолком и длинные столы для любого праздника."},
+ book:{es:"Reservar mesa",en:"Book a table",ru:"Забронировать"},party:{es:"Organizar una fiesta",en:"Plan a party",ru:"Устроить праздник"},
+ t2:{es:"estrellas en la carta",en:"stars on the menu",ru:"звёзд в меню"},t3:{es:"te atendemos en tu idioma",en:"served in your language",ru:"обслуживаем на вашем языке"},
+ mCap:{es:"La carta",en:"The menu",ru:"Меню"},mT:{es:"Siete estrellas de la casa",en:"Seven stars of the house",ru:"Семь звёзд нашей кухни"},mP:{es:"La carta completa tiene cocina rusa y algunos clásicos españoles. Estos siete son los que la gente vuelve a pedir.",en:"The full menu mixes Russian cooking with a few Spanish classics. These seven are what people come back for.",ru:"В меню русская кухня и немного испанской классики. Эти семь блюд заказывают снова и снова."},
+ bCap:{es:"Celebraciones",en:"Celebrations",ru:"Праздники"},bT:{es:"Banquetes a la rusa",en:"Russian-style banquets",ru:"Банкет по-русски"},bP:{es:"Cumpleaños, bodas, aniversarios, Nochevieja. La mesa llena desde el primer brindis, como debe ser.",en:"Birthdays, weddings, anniversaries, New Year's Eve. A full table from the first toast, as it should be.",ru:"Дни рождения, свадьбы, юбилеи, Новый год. Стол накрыт с первого тоста, как положено."},
+ pp:{es:" / persona",en:" per person",ru:" с человека"},
+ p1c:{es:"Desde 10 personas",en:"From 10 guests",ru:"От 10 гостей"},p1t:{es:"Clásico",en:"Classic",ru:"Классический"},p1a:{es:"6 zakuski a la mesa",en:"6 zakuski on the table",ru:"6 закусок на стол"},p1b:{es:"Principal a elegir",en:"Choice of main",ru:"Горячее на выбор"},p1d:{es:"Postre y té",en:"Dessert and tea",ru:"Десерт и чай"},
+ p2c:{es:"El más pedido",en:"Most booked",ru:"Самый популярный"},p2t:{es:"Festivo",en:"Festive",ru:"Праздничный"},p2a:{es:"10 zakuski y caviar rojo",en:"10 zakuski and red caviar",ru:"10 закусок и красная икра"},p2b:{es:"Shashlik a la mesa",en:"Shashlik for the table",ru:"Шашлык на стол"},p2d:{es:"Tarta Napoleón y vodka de la casa",en:"Napoleon cake and house vodka",ru:"Торт «Наполеон» и водка"},
+ p3c:{es:"Hasta 80 personas",en:"Up to 80 guests",ru:"До 80 гостей"},p3t:{es:"Gran banquete",en:"Grand banquet",ru:"Большой банкет"},p3a:{es:"Sala en exclusiva",en:"Room to yourselves",ru:"Зал только для вас"},p3b:{es:"Menú completo y barra libre 3 h",en:"Full menu and 3-hour open bar",ru:"Полное меню и бар 3 часа"},p3d:{es:"Tarta de celebración incluida",en:"Celebration cake included",ru:"Праздничный торт включён"},
+ cL:{es:"Invitados",en:"Guests",ru:"Гостей"},cX:{es:"× menú Festivo =",en:"× Festive menu =",ru:"× праздничное меню ="},cN:{es:"precio orientativo, IVA incl.",en:"indicative price, VAT incl.",ru:"ориентировочно, с НДС"},
+ vCap:{es:"Visítanos",en:"Visit us",ru:"Ждём в гости"},vT:{es:"En el Eixample",en:"In the Eixample",ru:"В Эшампле"},
+ iA:{es:"Dirección",en:"Address",ru:"Адрес"},iM:{es:"Tetuan (L2), 2 min a pie",en:"Tetuan (L2), 2 min walk",ru:"Tetuan (L2), 2 минуты пешком"},iH:{es:"Horario",en:"Hours",ru:"Часы"},iHv:{es:"Todos los días 13:00–16:30 · 20:00–00:00",en:"Every day 13:00–16:30 · 20:00–00:00",ru:"Ежедневно 13:00–16:30 · 20:00–00:00"},iL:{es:"Idiomas",en:"Languages",ru:"Языки"},
+ route:{es:"Cómo llegar",en:"Directions",ru:"Маршрут"},poster:{es:"estrellas y una torre al revés",en:"stars and an upside-down tower",ru:"звёзд и башня вверх ногами"},posterS:{es:"Desde la primera visita",en:"Ask any regular",ru:"Спросите постоянных гостей"},
+ foot:{es:"Concepto de Vitrina Studio",en:"Concept by Vitrina Studio",ru:"Концепт Vitrina Studio"}
+};
+const W=[
+ ["I","Borsch","Борщ",8,{es:"Remolacha, ternera y smetana. El que mide a cualquier cocina rusa.",en:"Beetroot, beef and smetana. The dish every Russian kitchen is judged by.",ru:"Свёкла, говядина и сметана. По нему судят любую русскую кухню."},true],
+ ["II","Pelmeni","Пельмени",12,{es:"Hechos a mano, con mantequilla o en caldo.",en:"Handmade, with butter or in broth.",ru:"Ручной лепки, со сливочным маслом или в бульоне."}],
+ ["III","Shashlik","Шашлык",17,{es:"Brochetas de cerdo marinado a la brasa con cebolla y adjika.",en:"Grilled marinated pork skewers with onion and adjika.",ru:"Свиной шашлык с луком и аджикой."}],
+ ["IV","Kotleta po-kievski","Котлета по-киевски",16,{es:"Pechuga empanada rellena de mantequilla de hierbas. Cuidado al cortar.",en:"Breaded chicken filled with herb butter. Careful when you cut it.",ru:"Курица с травяным маслом внутри. Осторожно, брызгает!"}],
+ ["V","Golubtsy","Голубцы",14,{es:"Hojas de col rellenas de carne y arroz, en salsa de tomate.",en:"Cabbage rolls of meat and rice in tomato sauce.",ru:"Капустные рулеты с мясом и рисом в томатном соусе."}],
+ ["VI","Blinis con caviar","Блины с икрой",15,{es:"Crepes finos, smetana y huevas de salmón.",en:"Thin pancakes, smetana and salmon roe.",ru:"Тонкие блины, сметана и красная икра."}],
+ ["VII","Napoleón","Наполеон",6.5,{es:"Mil capas de hojaldre y crema. El final de toda fiesta rusa.",en:"A thousand layers of pastry and cream. How every Russian party ends.",ru:"Слоёное тесто и заварной крем. Без него праздник не праздник."},true]
+];
+function renderW(){const l=document.documentElement.lang,box=document.getElementById("stars");box.textContent="";
+  W.forEach(([n,es,ru,p,d,big])=>{const a=document.createElement("article");a.className="wd"+(big?" big":"");
+    a.innerHTML='<div class="ph"><img alt="" loading="lazy"></div><span class="n"></span><span class="ru"></span><h3></h3><p></p><span class="pr"></span>';
+    a.querySelector(".ph img").src="photos/"+["borscht","pelmeni","shashlik","kiev","golubtsy","blini","napoleon"][W.findIndex(x=>x[0]===n)]+".jpg";a.querySelector(".ph img").alt=l==="ru"?ru:es;a.querySelector(".n").textContent=n;a.querySelector("h3").textContent=l==="ru"?ru:es;a.querySelector(".ru").textContent=l==="ru"?es:ru;
+    a.querySelector("p").textContent=d[l];a.querySelector(".pr").textContent=(p%1?p.toFixed(2).replace(".",","):p)+" €";box.append(a);});}
+new MutationObserver(renderW).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+const g=document.getElementById("g");g.oninput=()=>{document.getElementById("gn").textContent=g.value;document.getElementById("tot").textContent=(g.value*55).toLocaleString("es-ES")+" €";};
+</script>
+<script src="../shared/i18n.js"></script>
+<script src="../shared/slots.js"></script>
+<script src="assistant-config.js"></script>
+<script src="../shared/assistant.js"></script>
+<script src="photos/credits.js"></script>
+<script src="../shared/credits.js"></script>
+<script>renderW();</script>
+<script src="../shared/motion.js" data-accent="#E8553E" data-bg="#15111F" data-fg="#F3E9D2" data-name="Las 7 Estrellas" data-photos="banquet.jpg,blini.jpg,borscht.jpg,golubtsy.jpg,kiev.jpg,napoleon.jpg,pelmeni.jpg,shashlik.jpg,street.jpg"></script>
+</body>
+</html>

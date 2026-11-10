@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Vitrina Studio · Demo de asistente IA</title>
+<meta name="description" content="Prueba un asistente de IA que reserva mesas y llena el CRM del restaurante, en español, inglés y ruso.">
+<meta property="og:title" content="Vitrina Studio · Demo de asistente IA">
+<meta property="og:description" content="Prueba un asistente de IA que reserva mesas y llena el CRM del restaurante, en español, inglés y ruso.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../works/lazur-desk.jpg">
+<meta name="theme-color" content="#131A2A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131A2A'/%3E%3Cpath d='M5 11V5h6M21 5h6v6M27 21v6h-6M11 27H5v-6' fill='none' stroke='%23D2AE6E' stroke-width='2'/%3E%3Cpath d='M10.5 10 16 22.5 21.5 10' fill='none' stroke='%23EFE9DC' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}
+/* Vitrina logo: wide caps in a display-case frame of brass corners */
+.vlogo{position:relative;display:inline-block;padding:8px 13px 7px 15px;text-align:center;color:var(--ink);line-height:1;flex:none}
+.vlogo s{position:absolute;width:9px;height:9px;border:0 solid var(--sun,#B08A4F)}
+.vlogo s:nth-of-type(1){top:0;left:0;border-width:1.5px 0 0 1.5px}.vlogo s:nth-of-type(2){top:0;right:0;border-width:1.5px 1.5px 0 0}
+.vlogo s:nth-of-type(3){bottom:0;left:0;border-width:0 0 1.5px 1.5px}.vlogo s:nth-of-type(4){bottom:0;right:0;border-width:0 1.5px 1.5px 0}
+.vlogo b{display:block;font:500 18px/1 var(--f-display);letter-spacing:.36em;margin-right:-.36em}
+.vlogo i{display:block;font:500 8.5px/1 var(--f-display);font-style:normal;letter-spacing:1.02em;margin:6px -1.02em 0 0;color:var(--muted)}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;600;700&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,600&display=swap">
+<style>
+/* Layout: three working panes on one screen — what it is · the customer's phone · the owner's CRM */
+:root{
+  --paper:#F5F1E8; --surface:#FFFFFF; --ink:#131A2A; --muted:#5E6373; --line:#E2D9C6;
+  --accent:#131A2A; --on-accent:#F5F1E8; --soft:#ECE4D3; --good:#1E7A4C; --warn:#A8620F;
+  --f-display:"Geologica","Onest",system-ui,sans-serif;
+  --f-body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  /* Casa Brasa brand, the phone's own world */
+  --cb-ink:#1A1411; --cb-ember:#FF6A2B; --cb-cream:#F3E6D4; --cb-chat:#EFE6DA;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0E131F; --surface:#161C2A; --ink:#EFE9DC; --muted:#A3A8B5; --line:#262E40;
+  --accent:#D2AE6E; --on-accent:#131A2A; --soft:#1A2233; --good:#D2AE6E; --warn:#E3A55A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0E131F; --surface:#161C2A; --ink:#EFE9DC; --muted:#A3A8B5; --line:#262E40;
+  --accent:#D2AE6E; --on-accent:#131A2A; --soft:#1A2233; --good:#D2AE6E; --warn:#E3A55A; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:-.02em;line-height:1.05;margin:0;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.label{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:700;font-size:20px;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.brand svg{width:28px;height:28px;flex:none}
+.brand small{font-family:var(--f-mono);font-weight:400;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-left:10px;border-left:1px solid var(--line)}
+.langs{display:flex;border:1px solid var(--line);border-radius:99px;padding:3px;gap:2px;background:var(--surface)}
+.langs button{border:0;background:none;font-family:var(--f-mono);font-size:12px;padding:6px 11px;border-radius:99px;color:var(--muted)}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+main .wrap{display:grid;grid-template-columns:minmax(0,1fr) 400px minmax(0,1.05fr);gap:44px;padding-block:44px 64px;align-items:start}
+@media (max-width:1180px){main .wrap{grid-template-columns:400px minmax(0,1fr)}.intro{grid-column:1/-1}}
+@media (max-width:820px){main .wrap{grid-template-columns:minmax(0,1fr);gap:36px;padding-block:28px 48px}}
+
+/* intro */
+.intro{display:flex;flex-direction:column;gap:20px;min-width:0}
+.intro h1{font-size:clamp(32px,3.6vw,50px)}
+.intro .sub{color:var(--muted);font-size:17.5px;max-width:44ch}
+.mode{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;padding:7px 13px 7px 11px;border-radius:99px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;font-weight:500}
+.mode i{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.mode[data-m="live"] i{background:#2FB36B;box-shadow:0 0 0 4px color-mix(in srgb,#2FB36B 22%,transparent)}
+.mode[data-m="recorded"] i{background:var(--warn)}
+.can{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.can li{display:grid;grid-template-columns:28px 1fr;gap:6px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.can li b{font-family:var(--f-mono);font-weight:500;font-size:12px;color:var(--accent);padding-top:3px}
+.note{font-size:13.5px;color:var(--muted);max-width:52ch}
+.note a{color:var(--accent)}
+
+/* phone */
+.phone{width:min(400px,100%);justify-self:center;background:#0E0B09;padding:10px;border-radius:46px;box-shadow:0 60px 100px -50px rgba(26,20,17,.55),0 0 0 1px rgba(255,255,255,.04) inset}
+.screen{height:720px;max-height:calc(100dvh - 60px);min-height:560px;border-radius:37px;overflow:hidden;display:flex;flex-direction:column;background:var(--cb-chat);color:var(--cb-ink);position:relative}
+@media (max-width:820px){.screen{height:640px}}
+.ph-head{background:var(--cb-ink);color:var(--cb-cream);padding:22px 16px 14px;display:flex;align-items:center;gap:12px}
+.ph-av{width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FFB07A,var(--cb-ember) 55%,#9E2C17);display:grid;place-items:center;font:italic 600 17px/1 "Playfair Display",Georgia,serif;color:var(--cb-ink);flex:none}
+.ph-name{font:italic 600 19px/1.1 "Playfair Display",Georgia,serif}
+.ph-stat{font-size:12.5px;opacity:.7}
+.ph-head .grow{flex:1;min-width:0}
+.ph-reset{border:1px solid rgba(243,230,212,.25);background:none;color:var(--cb-cream);border-radius:99px;font-size:12px;padding:6px 11px;opacity:.85}
+.ph-reset:hover{opacity:1;border-color:rgba(243,230,212,.5)}
+.msgs{flex:1;overflow-y:auto;padding:16px 12px 10px;display:flex;flex-direction:column;gap:7px;background-image:radial-gradient(rgba(26,20,17,.06) 1px,transparent 1.3px);background-size:16px 16px;scroll-behavior:smooth}
+.day{align-self:center;font-size:11.5px;background:rgba(255,255,255,.75);padding:4px 10px;border-radius:8px;color:#6B5A4E;margin-bottom:4px}
+.b{max-width:84%;padding:9px 12px 8px;border-radius:16px;font-size:14.5px;line-height:1.42;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 1px 0 rgba(26,20,17,.06);animation:pop .28s ease-out both}
+.b.bot{align-self:flex-start;background:#FFFFFF;border-bottom-left-radius:5px}
+.b.me{align-self:flex-end;background:#FFD7BF;border-bottom-right-radius:5px}
+.b time{display:block;text-align:right;font-size:10.5px;color:#8A7869;margin-top:2px}
+.b.err{background:#FBE3DA;color:#7A2410}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.typing{align-self:flex-start;background:#fff;border-radius:16px 16px 16px 5px;padding:12px 14px;display:flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:#B9A797;animation:dot 1.1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.tool{align-self:center;display:flex;align-items:center;gap:7px;font-family:var(--f-mono);font-size:11px;letter-spacing:.02em;color:#6B5A4E;background:rgba(255,255,255,.6);border:1px dashed rgba(26,20,17,.18);padding:5px 10px;border-radius:99px;animation:pop .25s ease-out both;max-width:92%}
+.tool i{width:7px;height:7px;border-radius:50%;background:#C9B8A8;flex:none}
+.tool.ok i{background:#2FB36B}.tool.no i{background:var(--cb-ember)}
+.ticket{align-self:flex-start;width:84%;background:var(--cb-ink);color:var(--cb-cream);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:1fr auto;gap:2px 10px;animation:pop .3s ease-out both}
+.ticket .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#FFB07A}
+.ticket .r{font-family:var(--f-mono);font-size:11px;opacity:.75;text-align:right}
+.ticket .v{grid-column:1/-1;font-size:15px;font-weight:500}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 12px 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;border:1px solid rgba(26,20,17,.16);background:#fff;border-radius:99px;padding:7px 12px;font-size:13px;color:var(--cb-ink);white-space:nowrap}
+.chips button:hover{border-color:var(--cb-ember)}
+.composer{display:flex;gap:8px;padding:10px 12px 16px;align-items:center}
+.composer input{flex:1;min-width:0;border:0;background:#fff;border-radius:99px;padding:12px 16px;font:inherit;font-size:15px;color:var(--cb-ink)}
+.composer input::placeholder{color:#9C8B7D}
+.composer input:disabled{background:rgba(255,255,255,.55)}
+.send{width:44px;height:44px;border-radius:50%;border:0;background:var(--cb-ember);color:var(--cb-ink);display:grid;place-items:center;flex:none}
+.send:disabled{opacity:.4;cursor:default}
+.send svg{width:18px;height:18px}
+
+/* CRM */
+.crm{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;min-width:0;display:flex;flex-direction:column}
+.crm-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.crm-head h2{font-size:19px;letter-spacing:-.01em}
+.crm-head .label{white-space:nowrap}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.kpi{padding:14px 16px;display:flex;flex-direction:column;gap:2px;border-right:1px solid var(--line);min-width:0}
+.kpi:last-child{border-right:0}
+.kpi b{font-family:var(--f-display);font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kpi span{font-size:12px;color:var(--muted);line-height:1.3}
+@media (max-width:460px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi:nth-child(2){border-right:0}.kpi:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.feed{padding:14px;display:flex;flex-direction:column;gap:10px;min-height:280px}
+.empty{margin:auto;text-align:center;color:var(--muted);font-size:14.5px;max-width:30ch;display:flex;flex-direction:column;align-items:center;gap:10px;padding:30px 0}
+.empty svg{width:34px;height:34px;opacity:.55}
+.card{border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;animation:slidein .4s cubic-bezier(.2,.8,.2,1) both;background:var(--paper)}
+@keyframes slidein{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pill{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:6px;font-weight:500}
+.pill.bk{background:var(--soft);color:var(--good)}
+.pill.ld{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
+.card-top .who{font-weight:600;font-size:15.5px}
+.card-top .when{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:5px 16px;font-size:13.5px}
+.card dt{color:var(--muted)}
+.card dd{margin:0;font-weight:500;min-width:0;overflow-wrap:anywhere}
+.card .next{font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:9px;display:flex;gap:7px;align-items:center}
+.card .next i{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
+.log{border-top:1px solid var(--line);padding:12px 20px 16px;display:flex;flex-direction:column;gap:6px}
+.log ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);max-height:120px;overflow-y:auto}
+.log li{display:flex;gap:10px}
+.log li span:first-child{flex:none;color:var(--ink);opacity:.6;font-variant-numeric:tabular-nums}
+
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+footer a{color:var(--accent)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../">
+      <span class="vlogo" aria-hidden="true"><s></s><s></s><s></s><s></s><b>VITRINA</b><i>STUDIO</i></span> <small data-i="tag"></small>
+    </a>
+    <div class="langs" role="group" aria-label="Language">
+      <button data-l="es" aria-pressed="false">ES</button><button data-l="en" aria-pressed="true">EN</button><button data-l="ru" aria-pressed="false">RU</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="intro">
+      <span class="label" data-i="eyebrow"></span>
+      <h1 data-i="h1"></h1>
+      <p class="sub" data-i="sub"></p>
+      <span class="mode" id="mode" data-m="connecting"><i></i><span id="modeTxt"></span></span>
+      <ul class="can">
+        <li><b>01</b><span data-i="can1"></span></li>
+        <li><b>02</b><span data-i="can2"></span></li>
+        <li><b>03</b><span data-i="can3"></span></li>
+        <li><b>04</b><span data-i="can4"></span></li>
+      </ul>
+      <p class="note" id="note"></p>
+    </section>
+
+    <div class="phone">
+      <div class="screen">
+        <div class="ph-head">
+          <div class="ph-av" aria-hidden="true">CB</div>
+          <div class="grow"><div class="ph-name">Casa Brasa</div><div class="ph-stat" id="stat"></div></div>
+          <button class="ph-reset" id="reset" data-i="reset"></button>
+        </div>
+        <div class="msgs" id="msgs" aria-live="polite"></div>
+        <div class="chips" id="chips"></div>
+        <form class="composer" id="form" autocomplete="off">
+          <input id="inp" type="text" maxlength="500" aria-label="Message">
+          <button class="send" id="sendBtn" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </form>
+      </div>
+    </div>
+
+    <section class="crm" aria-label="CRM">
+      <div class="crm-head"><h2 data-i="crmT"></h2><span class="label" data-i="crmL"></span></div>
+      <div class="kpis">
+        <div class="kpi"><b id="kMsg">0</b><span data-i="kMsg"></span></div>
+        <div class="kpi"><b id="kAvg">–</b><span data-i="kAvg"></span></div>
+        <div class="kpi"><b id="kBk">0</b><span data-i="kBk"></span></div>
+        <div class="kpi"><b id="kLd">0</b><span data-i="kLd"></span></div>
+      </div>
+      <div class="feed" id="feed"></div>
+      <div class="log"><span class="label" data-i="logT"></span><ol id="log"></ol></div>
+    </section>
+  </div>
+</main>
+
+<footer><div class="wrap"><span data-i="foot1"></span><a href="../" data-i="foot2"></a></div></footer>
+
+<script>
+const T={
+ tag:["Demo en vivo","Live demo","Живое демо"],
+ eyebrow:["Pack premium · Asistente IA","Premium pack · AI assistant","Премиум-пакет · ИИ-ассистент"],
+ h1:["Escribe a Casa Brasa como lo haría un cliente","Message Casa Brasa like a real customer would","Напишите в Casa Brasa как обычный клиент"],
+ sub:["El asistente responde en tu idioma, mira las mesas libres y reserva. A la derecha ves lo que recibe el dueño.","The assistant replies in your language, checks free tables and books them. On the right is what the owner sees.","Ассистент отвечает на вашем языке, проверяет свободные столы и бронирует. Справа то, что видит владелец."],
+ can1:["Reserva mesa: comprueba horario y huecos libres antes de confirmar","Books tables: checks opening hours and free slots before confirming","Бронирует столы: сверяет часы работы и свободные места"],
+ can2:["Responde sobre carta, precios, alérgenos, terraza y parking","Answers about the menu, prices, allergens, terrace and parking","Отвечает про меню, цены, аллергены, террасу и парковку"],
+ can3:["Pasa grupos y eventos al encargado como lead","Passes groups and events to the manager as a lead","Передаёт группы и мероприятия менеджеру как лид"],
+ can4:["Habla español, inglés, ruso y casi cualquier otro idioma","Speaks Spanish, English, Russian and most other languages","Говорит по-испански, по-английски, по-русски и почти на любом языке"],
+ reset:["Nuevo chat","New chat","Новый чат"],
+ crmT:["Panel del dueño","Owner's dashboard","Панель владельца"],
+ crmL:["CRM · hoy","CRM · today","CRM · сегодня"],
+ kMsg:["mensajes respondidos","messages answered","ответов"],
+ kAvg:["tiempo medio de respuesta","average reply time","среднее время ответа"],
+ kBk:["reservas","bookings","брони"],
+ kLd:["leads para llamar","leads to call back","лидов на звонок"],
+ logT:["Actividad","Activity","Активность"],
+ empty:["Aún no hay nada. Reserva una mesa en el chat y aparecerá aquí al momento.","Nothing yet. Book a table in the chat and it shows up here instantly.","Пока пусто. Забронируйте стол в чате, и бронь сразу появится здесь."],
+ foot1:["Casa Brasa es un restaurante de ejemplo. Las reservas de esta demo no son reales.","Casa Brasa is a concept restaurant. Bookings in this demo are not real.","Casa Brasa — концепт-ресторан. Брони в этом демо ненастоящие."],
+ foot2:["Ver el portfolio de Vitrina Studio →","See the Vitrina Studio portfolio →","Портфолио Vitrina Studio →"],
+ online:["asistente · responde al instante","assistant · replies instantly","ассистент · отвечает сразу"],
+ typing:["escribiendo…","typing…","печатает…"],
+ ph:["Escribe un mensaje","Type a message","Напишите сообщение"],
+ phRec:["Toca una sugerencia para ver la demo","Tap a suggestion to play the demo","Нажмите на подсказку, чтобы запустить демо"],
+ today:["Hoy","Today","Сегодня"],
+ mConnecting:["Conectando con la IA…","Connecting to the AI…","Подключаем ИИ…"],
+ mLive:["IA en vivo · escribe lo que quieras","Live AI · type anything","ИИ в эфире · пишите что угодно"],
+ mRec:["Demo grabada","Recorded demo","Записанное демо"],
+ nLive:["Al enviar el primer mensaje, Claude puede pedirte permiso para usar la IA en esta página. Las respuestas son reales, no un guion.","Your first message may ask your permission to use Claude on this page. The replies are generated live, not scripted.","При первом сообщении Claude может попросить разрешение на ИИ для этой страницы. Ответы настоящие, не по сценарию."],
+ nRec:["La IA en vivo funciona cuando la página se abre dentro de Claude. Aquí verás conversaciones grabadas con las mismas reservas y leads.","Live AI works when this page is open inside Claude. Here you get recorded chats that create the same bookings and leads.","Живой ИИ работает, когда страница открыта в Claude. Здесь записанные диалоги, которые создают такие же брони и лиды."],
+ nDenied:["No se dio permiso para la IA, así que sigue una demo grabada.","AI access wasn't allowed, so you're seeing the recorded demo.","Доступ к ИИ не разрешён, поэтому показываем записанное демо."],
+ greet:["¡Hola! Soy el asistente de Casa Brasa 🔥 Puedo reservarte mesa, contarte la carta o resolver cualquier duda. ¿En qué te ayudo?","Hi! I'm Casa Brasa's assistant 🔥 I can book you a table, walk you through the menu or answer any question. How can I help?","Здравствуйте! Я ассистент Casa Brasa 🔥 Могу забронировать стол, рассказать про меню или ответить на вопросы. Чем помочь?"],
+ errBusy:["Hay mucha gente escribiendo ahora mismo. Prueba de nuevo en un minuto.","Lots of people are writing right now. Try again in a minute.","Сейчас много сообщений. Попробуйте через минуту."],
+ errGen:["No he podido responder. Envía el mensaje otra vez.","I couldn't reply that time. Send your message again.","Не получилось ответить. Отправьте сообщение ещё раз."],
+ tChk:["Mirando mesas","Checking tables","Проверяю столы"],
+ tFree:["Libre","Free","Свободно"],
+ tFull:["Completo","Full","Занято"],
+ tClosed:["Cerrado a esa hora","Closed at that time","В это время закрыто"],
+ tBook:["Reserva guardada","Booking saved","Бронь сохранена"],
+ tLead:["Lead enviado al encargado","Lead sent to the manager","Лид передан менеджеру"],
+ tkBk:["Mesa reservada","Table booked","Стол забронирован"],
+ pBk:["Reserva","Booking","Бронь"],
+ pLd:["Lead","Lead","Лид"],
+ dWhen:["Cuándo","When","Когда"],
+ dPeople:["Personas","Guests","Гостей"],
+ dLang:["Idioma","Language","Язык"],
+ dChan:["Canal","Channel","Канал"],
+ dTopic:["Asunto","Topic","Тема"],
+ dNotes:["Notas","Notes","Заметки"],
+ chan:["Chat web","Web chat","Веб-чат"],
+ nextBk:["Recordatorio por WhatsApp el día de la reserva a las 12:00","WhatsApp reminder on the day at 12:00","Напоминание в WhatsApp в день брони в 12:00"],
+ nextLd:["El encargado llama en menos de 24 h","Manager calls back within 24 h","Менеджер перезвонит в течение 24 ч"],
+ lgChk:["consulta disponibilidad","availability check","проверка мест"],
+ lgBk:["reserva creada","booking created","бронь создана"],
+ lgLd:["lead creado","lead created","лид создан"],
+ lgMsg:["mensaje respondido","message answered","ответ отправлен"],
+ sec:[" s"," s"," с"],
+ c1:["Mesa para 4 el viernes a las 21:00","Table for 4 on Friday at 9pm","Стол на 4 в пятницу в 21:00"],
+ c2:["¿Tenéis platos vegetarianos?","Do you have vegetarian dishes?","Есть вегетарианские блюда?"],
+ c3:["Somos 25 para un cumpleaños","We're 25 people for a birthday","Нас 25 человек на день рождения"],
+ c4:["¿Hay terraza y aparcamiento?","Is there a terrace and parking?","Есть терраса и парковка?"],
+};
+const LANGS=["es","en","ru"], LOC={es:"es-ES",en:"en-GB",ru:"ru-RU"};
+let lang="en";
+try{const s=localStorage.getItem("cb-lang");if(LANGS.includes(s))lang=s;else{const n=(navigator.language||"en").slice(0,2);if(LANGS.includes(n))lang=n;}}catch(e){}
+const t=k=>T[k][LANGS.indexOf(lang)];
+const $=id=>document.getElementById(id);
+
+/* ---------- restaurant facts and booking logic ---------- */
+const HOURS={0:[[13*60,16*60+30]],1:[],2:[[13*60,16*60],[20*60,23*60+30]],3:[[13*60,16*60],[20*60,23*60+30]],4:[[13*60,16*60],[20*60,23*60+30]],5:[[13*60,16*60],[20*60,23*60+30]],6:[[13*60,16*60],[20*60,23*60+30]]};
+const pad=n=>String(n).padStart(2,"0");
+const iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const toMin=s=>{const m=/^(\d{1,2})[:.h]?(\d{2})?/.exec(String(s||"").trim());if(!m)return NaN;return (+m[1])*60+(+(m[2]||0));};
+const fmtT=m=>pad(Math.floor(m/60))+":"+pad(m%60);
+const dateOf=s=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s||"").trim());return m?new Date(+m[1],+m[2]-1,+m[3],12):null;};
+const RU_ACC=["воскресенье","понедельник","вторник","среду","четверг","пятницу","субботу"];
+const wd=(d,l)=>(l||lang)==="ru"?RU_ACC[d.getDay()]:d.toLocaleDateString(LOC[l||lang],{weekday:"long"});
+const niceDate=d=>d.toLocaleDateString(LOC[lang],{weekday:"short",day:"numeric",month:"short"});
+
+const state={msgs:[],bookings:[],leads:[],busy:false,mode:"connecting",answered:0,times:[]};
+
+function slotStatus(date,mins,people){
+  const d=dateOf(date); if(!d||isNaN(mins)) return "invalid";
+  const now=new Date(), today=dateOf(iso(now));
+  if(d<today) return "past";
+  if((d-today)/864e5>60) return "too_far";
+  if(people>10) return "group_over_10";
+  const wins=HOURS[d.getDay()];
+  if(!wins.length) return "closed_day";
+  if(!wins.some(([s,e])=>mins>=s&&mins<=e-60)) return "outside_hours";
+  if(iso(d)===iso(now)&&mins<now.getHours()*60+now.getMinutes()+30) return "past";
+  const key=date+fmtT(mins); let h=0; for(const c of key) h=(h*31+c.charCodeAt(0))%997;
+  const dow=d.getDay();
+  if((dow===5||dow===6)&&(mins===21*60||mins===21*60+30)) return "full";
+  if(h%6===0) return "full";
+  if(state.bookings.filter(b=>b.date===date&&b.mins===mins).length>=2) return "full";
+  return "free";
+}
+function alternatives(date,mins,people){
+  const d=dateOf(date); if(!d) return [];
+  const out=[];
+  for(const [s,e] of HOURS[d.getDay()]) for(let m=s;m<=e-60;m+=30) if(slotStatus(date,m,people)==="free") out.push(m);
+  return out.sort((a,b)=>Math.abs(a-mins)-Math.abs(b-mins)).slice(0,3).sort((a,b)=>a-b).map(fmtT);
+}
+function nextOpenDays(n){const out=[];const d=new Date();d.setHours(12,0,0,0);for(let i=0;out.length<n&&i<14;i++){const x=new Date(d);x.setDate(d.getDate()+i);if(HOURS[x.getDay()].length)out.push(x);}return out;}
+
+/* ---------- tools the AI can call ---------- */
+const TOOLS=[
+ {name:"check_availability",
+  description:"Check whether Casa Brasa has a free table. Call before offering or confirming any time.",
+  inputSchema:{type:"object",properties:{date:{type:"string",description:"YYYY-MM-DD"},time:{type:"string",description:"HH:MM, 24h"},people:{type:"integer"}},required:["date","time","people"]},
+  async execute(a){
+    const mins=toMin(a.time), people=Math.max(1,parseInt(a.people)||2);
+    const st=slotStatus(a.date,mins,people), d=dateOf(a.date);
+    const label=(d?niceDate(d)+" · ":"")+(isNaN(mins)?a.time:fmtT(mins))+" · "+people;
+    const alt=st==="free"?[]:alternatives(a.date,mins,people);
+    toolPill(t("tChk")+" · "+label, st==="free"?"ok":"no", st==="free"?t("tFree"):(st==="full"?t("tFull"):t("tClosed")));
+    logLine(t("lgChk")+" · "+label+" → "+st);
+    return {date:a.date,weekday:d?wd(d,"en"):null,time:isNaN(mins)?a.time:fmtT(mins),people,status:st,available:st==="free",alternatives_same_day:alt};
+  }},
+ {name:"create_booking",
+  description:"Book a table once the customer has agreed to a free slot and given a name. Never call without a name.",
+  inputSchema:{type:"object",properties:{name:{type:"string"},date:{type:"string",description:"YYYY-MM-DD"},time:{type:"string",description:"HH:MM"},people:{type:"integer"},language:{type:"string",description:"ISO code of the customer's language, e.g. es, en, ru"},notes:{type:"string",description:"Allergies, high chair, terrace, occasion. Empty if none."}},required:["name","date","time","people","language"]},
+  async execute(a){
+    const name=String(a.name||"").trim().slice(0,60); if(!name) throw new Error("Ask the customer for a name first.");
+    const mins=toMin(a.time), people=Math.max(1,parseInt(a.people)||2), st=slotStatus(a.date,mins,people);
+    if(st!=="free") return {ok:false,status:st,alternatives_same_day:alternatives(a.date,mins,people)};
+    const ref="CB-"+(1000+Math.floor(Math.random()*9000));
+    const b={kind:"bk",ref,name,date:a.date,mins,people,lang:String(a.language||lang).slice(0,2).toUpperCase(),notes:String(a.notes||"").slice(0,140),at:new Date()};
+    state.bookings.push(b);
+    toolPill(t("tBook")+" · "+ref,"ok");
+    ticket(b); addCard(b); logLine(t("lgBk")+" · "+ref+" · "+name);
+    return {ok:true,ref,reminder:"WhatsApp reminder at 12:00 on the day of the booking"};
+  }},
+ {name:"save_lead",
+  description:"Pass a request to the human manager: groups over 10, private events, set menus, complaints, or anything you cannot answer. Ask for a name first.",
+  inputSchema:{type:"object",properties:{name:{type:"string"},topic:{type:"string",description:"A few words, in the customer's language"},details:{type:"string",description:"Date, number of people, budget, anything useful"},language:{type:"string"}},required:["name","topic","language"]},
+  async execute(a){
+    const l={kind:"ld",name:String(a.name||"").trim().slice(0,60)||"—",topic:String(a.topic||"").slice(0,80),notes:String(a.details||"").slice(0,180),lang:String(a.language||lang).slice(0,2).toUpperCase(),at:new Date()};
+    state.leads.push(l);
+    toolPill(t("tLead"),"ok"); addCard(l); logLine(t("lgLd")+" · "+l.name);
+    return {ok:true,follow_up:"The manager will contact them within 24 hours"};
+  }},
+];
+
+function brief(){
+  const now=new Date(), days=[];
+  for(let i=0;i<14;i++){const d=new Date(now);d.setDate(now.getDate()+i);days.push(iso(d)+" "+wd(d,"en")+(i===0?" (today)":i===1?" (tomorrow)":""));}
+  const done=state.bookings.map(b=>b.ref+": "+b.name+", "+b.date+" "+fmtT(b.mins)+", "+b.people+" people").join("; ")||"none";
+  const leads=state.leads.map(l=>l.name+": "+l.topic).join("; ")||"none";
+  return `You are the WhatsApp-style assistant of Casa Brasa, a wood-fired grill restaurant in Valencia, Spain. You are chatting with a customer on the restaurant's website.
+
+STYLE: Reply in the customer's language (Spanish, English, Russian or any other). Warm, quick, like a good host texting: 1 to 3 short sentences, no markdown, no lists, at most one emoji. Use the customer's name once you know it. Never mention tools, systems or that you are a demo.
+
+TOOLS: Never state availability from memory: call check_availability first. If the slot is not free, offer the alternatives it returns. To book you need date, time, number of people and a name; ask only for what is missing, then call create_booking and confirm with the reference. Groups over 10, private events, complaints or anything you can't answer: ask for a name, then call save_lead and say the manager will get back within 24 hours. Don't write a reply before calling a tool; write it after. Never ask for a phone number or email: the chat already has their contact.
+
+DATES: Current local time ${pad(now.getHours())}:${pad(now.getMinutes())}. Next 14 days: ${days.join(", ")}. Resolve "tonight", "tomorrow", "Friday" with this list. If no time is given for dinner, suggest 21:00.
+
+RESTAURANT:
+- Address: Carrer de Sueca 24, Ruzafa, Valencia. Public car park Parking Ruzafa 200 m away (about €2/hour). Metro Bailén 6 min walk.
+- Hours: Tue–Sat lunch 13:00–16:00, dinner 20:00–23:30 (last booking 22:30). Sunday lunch only 13:00–16:30. Closed Monday.
+- Terrace with 8 tables, heated in winter; dogs welcome on the terrace. Kids welcome, high chairs available.
+- Menu: croquetas de jamón €9, burrata con tomate asado €13, pulpo a la brasa €22, chuletón de vaca vieja (1 kg, for 2) €68, secreto ibérico €21, lubina a la brasa €24, arroz negro (min 2 people) €18 per person, verduras de temporada a la brasa €14, berenjena ahumada con miso €12 (vegan), tarta de queso al horno €7, torrija caramelizada €7. Tasting menu €48 per person (5 dishes plus dessert; wine pairing +€22).
+- Vegetarian: burrata, verduras a la brasa, berenjena (vegan), croquetas de setas on request. Gluten-free: most grill dishes; tell staff about allergies, and add them to the booking notes.
+- 80+ wines, strong on Valencian and Spanish reds. Average spend €35–45 per person. Cards and Bizum accepted. No deposit for tables up to 10. Please cancel at least 2 hours before.
+
+ALREADY IN THIS CHAT: bookings made: ${done}. Leads passed on: ${leads}. The greeting you already sent: "${T.greet[1]}"`;
+}
+
+/* ---------- chat UI ---------- */
+const msgs=$("msgs");
+const clock=()=>{const d=new Date();return pad(d.getHours())+":"+pad(d.getMinutes());};
+function scrollDown(){msgs.scrollTop=msgs.scrollHeight;}
+function bubble(text,who){const b=document.createElement("div");b.className="b "+who;const s=document.createElement("span");s.textContent=text;const tm=document.createElement("time");tm.textContent=clock();b.append(s,tm);msgs.append(b);scrollDown();return s;}
+let typingEl=null;
+function typing(on){if(on&&!typingEl){typingEl=document.createElement("div");typingEl.className="typing";typingEl.innerHTML="<i></i><i></i><i></i>";msgs.append(typingEl);$("stat").textContent=t("typing");scrollDown();}
+ if(!on&&typingEl){typingEl.remove();typingEl=null;$("stat").textContent=t("online");}}
+function toolPill(text,cls,res){
+  const p=document.createElement("div");p.className="tool "+(cls||"");
+  const i=document.createElement("i");const s=document.createElement("span");s.textContent=text+(res?" → "+res:"");p.append(i,s);
+  if(typingEl) msgs.insertBefore(p,typingEl); else msgs.append(p);
+  if(cur){sealed=lastText.length;cur=null;} scrollDown();
+}
+function ticket(b){
+  const el=document.createElement("div");el.className="ticket";
+  const d=dateOf(b.date);
+  el.innerHTML='<span class="k"></span><span class="r"></span><span class="v"></span>';
+  el.querySelector(".k").textContent=t("tkBk");el.querySelector(".r").textContent=b.ref;
+  el.querySelector(".v").textContent=niceDate(d)+" · "+fmtT(b.mins)+" · "+b.people+" · "+b.name;
+  if(typingEl) msgs.insertBefore(el,typingEl); else msgs.append(el); scrollDown();
+}
+const clean=s=>s.replace(/\*\*(.+?)\*\*/g,"$1").replace(/^#+\s*/gm,"").trim();
+
+/* ---------- CRM ---------- */
+function renderFeed(){
+  const feed=$("feed");feed.textContent="";
+  const items=[...state.bookings,...state.leads].sort((a,b)=>b.at-a.at);
+  if(!items.length){feed.innerHTML='<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg><span></span></div>';feed.querySelector(".empty span").textContent=t("empty");}
+  else items.forEach(it=>feed.append(cardEl(it,false)));
+  $("kBk").textContent=state.bookings.length;$("kLd").textContent=state.leads.length;$("kMsg").textContent=state.answered;
+  $("kAvg").textContent=state.times.length?(state.times.reduce((a,b)=>a+b,0)/state.times.length).toFixed(1)+t("sec"):"–";
+}
+function cardEl(it,anim){
+  const c=document.createElement("article");c.className="card";if(!anim)c.style.animation="none";
+  const top=document.createElement("div");top.className="card-top";
+  const p=document.createElement("span");p.className="pill "+it.kind;p.textContent=it.kind==="bk"?t("pBk")+" · "+it.ref:t("pLd");
+  const w=document.createElement("span");w.className="who";w.textContent=it.name;
+  const at=document.createElement("span");at.className="when";at.textContent=pad(it.at.getHours())+":"+pad(it.at.getMinutes());
+  top.append(p,w,at);
+  const dl=document.createElement("dl");
+  const rows=it.kind==="bk"?[[t("dWhen"),niceDate(dateOf(it.date))+" · "+fmtT(it.mins)],[t("dPeople"),it.people],[t("dLang"),it.lang],[t("dChan"),t("chan")]]:[[t("dTopic"),it.topic],[t("dLang"),it.lang],[t("dChan"),t("chan")]];
+  if(it.notes) rows.push([t("dNotes"),it.notes]);
+  rows.forEach(([k,v])=>{const dt=document.createElement("dt");dt.textContent=k;const dd=document.createElement("dd");dd.textContent=v;dl.append(dt,dd);});
+  const nx=document.createElement("div");nx.className="next";nx.innerHTML="<i></i><span></span>";nx.querySelector("span").textContent=it.kind==="bk"?t("nextBk"):t("nextLd");
+  c.append(top,dl,nx);return c;
+}
+function addCard(){renderFeed();const first=$("feed").querySelector(".card");if(first)first.style.animation="";}
+function logLine(text){const li=document.createElement("li");li.innerHTML="<span></span><span></span>";li.children[0].textContent=clock();li.children[1].textContent=text;$("log").prepend(li);}
+
+/* ---------- live AI ---------- */
+let sample=null, cur=null, sealed=0, lastText="";
+async function connect(){
+  try{ if(window.claude&&typeof window.claude.use==="function") sample=await window.claude.use("sample"); }catch(e){sample=null;}
+  if(sample){ const lim=await sample.limits().catch(()=>null); if(lim&&!lim.tools) sample=null; }
+  setMode(sample?"live":"recorded");
+}
+function setMode(m,why){
+  state.mode=m;$("mode").dataset.m=m;
+  $("modeTxt").textContent=m==="live"?t("mLive"):m==="recorded"?t("mRec"):t("mConnecting");
+  $("note").textContent=why==="denied"?t("nDenied"):m==="live"?t("nLive"):m==="recorded"?t("nRec"):"";
+  const rec=m!=="live";$("inp").disabled=rec;$("sendBtn").disabled=rec;$("inp").placeholder=rec?t("phRec"):t("ph");
+  renderChips();
+}
+async function ask(text){
+  if(state.busy||!text.trim())return;
+  if(state.mode!=="live")return;
+  state.busy=true;$("sendBtn").disabled=true;hideChips();
+  bubble(text,"me");state.msgs.push({role:"user",content:text});
+  typing(true);cur=null;sealed=0;lastText="";
+  const t0=performance.now();let first=0;
+  const input=state.msgs.map((m,i)=>i===0?{role:"user",content:brief()+"\n\n---\nCustomer's message:\n"+m.content}:m);
+  if(state.msgs.length>1) input[input.length-1]={role:"user",content:state.msgs[state.msgs.length-1].content+"\n\n(Context refresh: bookings so far: "+(state.bookings.map(b=>b.ref).join(", ")||"none")+")"};
+  try{
+    const res=await sample(input,{tools:TOOLS,cache:false,modelTier:"quick",onText:({text})=>{
+      lastText=text;const seg=clean(text.slice(sealed));if(!seg)return;
+      if(!first)first=performance.now();
+      if(!cur){typing(false);cur=bubble("","bot");}
+      cur.textContent=seg;scrollDown();
+    }});
+    typing(false);
+    const reply=clean(res.text)||"…";
+    if(!cur&&reply!=="…") bubble(clean(res.text.slice(sealed))||reply,"bot");
+    state.msgs.push({role:"assistant",content:reply});
+    state.answered++;state.times.push(((first||performance.now())-t0)/1000);
+    logLine(t("lgMsg"));renderFeed();
+  }catch(e){
+    typing(false);state.msgs.pop();
+    const code=e&&e.code;
+    if(code==="not_granted"||code==="sampling_disabled"||code==="capability_disabled"||code==="tools_unavailable"||code==="not_declared"){sample=null;setMode("recorded",code==="not_granted"?"denied":"");}
+    else if(code!=="cancelled"){const s=bubble(code==="rate_limited"?t("errBusy"):t("errGen"),"bot");s.parentElement.classList.add("err");}
+  }finally{state.busy=false;if(state.mode==="live")$("sendBtn").disabled=false;$("inp").focus({preventScroll:true});}
+}
+
+/* ---------- recorded demo (same tools, scripted words) ---------- */
+function pickFriday(){const d=new Date();d.setHours(12,0,0,0);for(let i=1;i<9;i++){const x=new Date(d);x.setDate(d.getDate()+i);if(x.getDay()===5)return x;}return d;}
+function freeNear(date,want){const st=slotStatus(date,want,4);if(st==="free")return want;const a=alternatives(date,want,4);return a.length?toMin(a[0]):want;}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function play(steps){
+  if(state.busy)return;state.busy=true;hideChips();
+  for(const s of steps){
+    if(s.u){await wait(350);bubble(s.u,"me");await wait(500);typing(true);await wait(900);}
+    if(s.tool){const tool=TOOLS.find(x=>x.name===s.tool);const r=await tool.execute(s.args);s.after&&s.after(r);await wait(650);}
+    if(s.b){const t0=performance.now();await wait(400);typing(false);bubble(typeof s.b==="function"?s.b():s.b,"bot");state.answered++;state.times.push(1.2+Math.random()*.9);logLine(t("lgMsg"));renderFeed();await wait(700);}
+  }
+  typing(false);state.busy=false;renderChips();
+}
+function script(n){
+  const fri=pickFriday(),date=iso(fri),day=wd(fri);
+  const L=LANGS.indexOf(lang);
+  let ref="";const m=freeNear(date,21*60),tm=fmtT(m);
+  const S={
+   1:[
+    {u:T.c1[L]},
+    {tool:"check_availability",args:{date,time:"21:00",people:4}},
+    {b:()=>m===21*60?[`¡Sí! Tenemos mesa para 4 el ${day} a las 21:00. ¿A qué nombre la reservo?`,`Yes! We have a table for 4 on ${day} at 21:00. What name shall I put it under?`,`Да! Есть стол на 4 в ${day} в 21:00. На какое имя забронировать?`][L]
+                    :[`El ${day} a las 21:00 estamos completos, pero tengo mesa para 4 a las ${tm}. ¿Te va bien? Dime tu nombre y la reservo.`,`We're full at 21:00 on ${day}, but I have a table for 4 at ${tm}. Does that work? Tell me your name and it's yours.`,`В ${day} на 21:00 мест нет, но есть стол на 4 в ${tm}. Подойдёт? Напишите имя, и я забронирую.`][L]},
+    {u:["Perfecto, a nombre de Lucía. Una de nosotras es celíaca","Perfect, it's Anna. One of us is gluten-free","Отлично, на имя Анна. Одна из нас не ест глютен"][L]},
+    {tool:"create_booking",args:{name:["Lucía","Anna","Анна"][L],date,time:tm,people:4,language:lang,notes:["Una persona celíaca","One guest gluten-free","Один гость без глютена"][L]},after:r=>ref=r.ref},
+    {b:()=>[`¡Hecho, Lucía! Mesa para 4 el ${day} a las ${tm}, referencia ${ref}. He avisado a cocina de lo del gluten; casi toda la brasa es apta 🔥`,`Done, Anna! Table for 4 on ${day} at ${tm}, reference ${ref}. I've told the kitchen about the gluten; most of our grill dishes are safe 🔥`,`Готово, Анна! Стол на 4 в ${day} в ${tm}, номер ${ref}. Кухню предупредила про глютен, почти все блюда с гриля подходят 🔥`][L]},
+   ],
+   2:[
+    {u:T.c2[L]},
+    {b:["¡Claro! Burrata con tomate asado (13 €), verduras de temporada a la brasa (14 €) y berenjena ahumada con miso (12 €), que además es vegana. Si avisas, también hacemos croquetas de setas.","Of course! Burrata with roasted tomato (€13), seasonal grilled vegetables (€14) and smoked aubergine with miso (€12), which is vegan too. Ask ahead and we'll make mushroom croquetas.","Конечно! Буррата с печёными томатами (13 €), овощи с гриля (14 €) и копчёный баклажан с мисо (12 €), он ещё и веганский. По запросу делаем крокеты с грибами."][L]},
+   ],
+   3:[
+    {u:T.c3[L]},
+    {b:["¡Qué buen plan! Para grupos de más de 10 el encargado prepara un menú y precio a medida. ¿Me dices tu nombre y la fecha?","Sounds like a great night! For groups over 10 our manager puts together a set menu and price. Can I get your name and the date?","Отличный повод! Для групп больше 10 человек менеджер составляет отдельное меню и цену. Как вас зовут и на какую дату?"][L]},
+    {u:["Marta, el sábado 22 por la noche","Marta, Saturday the 22nd in the evening","Марта, суббота 22-го, вечер"][L]},
+    {tool:"save_lead",args:{name:["Marta","Marta","Марта"][L],topic:["Cumpleaños, 25 personas","Birthday, 25 people","День рождения, 25 человек"][L],details:["Sábado 22, cena","Saturday 22nd, dinner","Суббота 22-го, ужин"][L],language:lang}},
+    {b:["Apuntado, Marta. El encargado te escribe en menos de 24 horas con el menú y el precio para los 25 🎉","Got it, Marta. Our manager will message you within 24 hours with the menu and price for all 25 🎉","Записала, Марта. Менеджер напишет вам в течение 24 часов с меню и ценой на 25 человек 🎉"][L]},
+   ],
+   4:[
+    {u:T.c4[L]},
+    {b:["Sí: terraza con 8 mesas, climatizada en invierno, y los perros son bienvenidos. Hay un parking público a 200 m (unos 2 €/hora) y el metro Bailén está a 6 minutos andando.","Yes: a terrace with 8 tables, heated in winter, and dogs are welcome there. There's a public car park 200 m away (about €2/hour) and Bailén metro is a 6-minute walk.","Да: терраса на 8 столов, зимой с обогревом, с собаками можно. В 200 м есть платная парковка (около 2 €/час), метро Bailén в 6 минутах пешком."][L]},
+   ],
+  };
+  return S[n];
+}
+
+/* ---------- chips ---------- */
+let chipsUsed=false;
+function renderChips(){
+  const box=$("chips");box.textContent="";
+  if(chipsUsed&&state.mode==="live"){box.hidden=true;return;}
+  box.hidden=false;
+  [1,2,3,4].forEach(n=>{const b=document.createElement("button");b.type="button";b.textContent=t("c"+n);
+    b.onclick=()=>{if(state.mode==="live"){ask(t("c"+n));}else play(script(n));};box.append(b);});
+}
+function hideChips(){chipsUsed=true;if(state.mode==="live")$("chips").hidden=true;}
+
+/* ---------- boot ---------- */
+function resetChat(){
+  if(state.busy)return;
+  state.msgs=[];msgs.textContent="";chipsUsed=false;
+  const d=document.createElement("div");d.className="day";d.textContent=t("today");msgs.append(d);
+  bubble(t("greet"),"bot");renderChips();
+}
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i]").forEach(el=>{el.textContent=t(el.dataset.i);});
+  document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===lang));
+  $("stat").textContent=t("online");setMode(state.mode);renderFeed();
+}
+document.querySelectorAll(".langs button").forEach(b=>b.onclick=()=>{if(state.busy||b.dataset.l===lang)return;lang=b.dataset.l;try{localStorage.setItem("cb-lang",lang);}catch(e){}applyLang();resetChat();});
+$("reset").onclick=resetChat;
+$("form").addEventListener("submit",e=>{e.preventDefault();const v=$("inp").value;if(!v.trim())return;$("inp").value="";ask(v);});
+applyLang();resetChat();connect();
+</script>
+
+</body>
+</html>

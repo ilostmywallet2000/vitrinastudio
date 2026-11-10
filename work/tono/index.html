@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es" data-default="es">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tono Atelier · Color y corte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Commissioner:wght@300;400;500;600&display=swap">
+<style>
+/* Fashion editorial in black and paper; the only colour on the page is hair colour. */
+:root{
+  --paper:#F4F2EE; --white:#FFFFFF; --ink:#0F0F0F; --grey:#6B6862; --line:#D9D5CD;
+  --copper:#B5562B; --honey:#D9A55B; --ash:#B9B3A8; --plum:#5B2333; --choc:#3B2418; --rose:#C98B7E;
+  --f-d:"Montserrat","Helvetica Neue",Arial,sans-serif; --f-b:"Commissioner",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:300 17px/1.6 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--f-d);font-weight:300;margin:0;line-height:1;text-transform:uppercase;letter-spacing:.02em;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.w{max-width:1260px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.k{font:500 11.5px/1 var(--f-b);letter-spacing:.28em;text-transform:uppercase;color:var(--grey)}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 28px;font:500 13px/1 var(--f-b);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);color:var(--ink);background:none;cursor:pointer;transition:background .25s,color .25s}
+.btn:hover,.btn.f{background:var(--ink);color:var(--paper)}
+.btn.f:hover{background:var(--copper);border-color:var(--copper)}
+header{border-bottom:1px solid var(--line)}
+header .w{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding-block:18px;gap:16px}
+nav{display:flex;gap:26px;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+nav a{text-decoration:none;color:var(--grey)}nav a:hover{color:var(--ink)}
+.logo{font:400 24px/1 var(--f-d);letter-spacing:.3em;text-decoration:none;text-align:center}
+.logo small{display:block;font:500 9px/1 var(--f-b);letter-spacing:.5em;margin-top:6px;color:var(--grey)}
+.langs{justify-self:end;display:flex;gap:4px}
+.langs button{border:0;background:none;font:500 12px/1 var(--f-b);letter-spacing:.14em;padding:8px 6px;color:var(--grey);cursor:pointer}
+.langs button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:6px}
+@media (max-width:860px){nav{display:none}header .w{grid-template-columns:auto 1fr}.logo{text-align:left}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);min-height:640px;border-bottom:1px solid var(--line)}
+@media (max-width:900px){.hero{grid-template-columns:1fr;min-height:0}}
+.hero .txt{padding:72px max(20px,calc((100vw - 1260px)/2 + 20px)) 64px;padding-right:48px;display:flex;flex-direction:column;justify-content:center;gap:26px}
+@media (max-width:900px){.hero .txt{padding:44px 20px 48px}}
+.hero h1{font-size:clamp(52px,7.4vw,116px);line-height:.92}
+.hero .lede{font-size:19px;color:var(--grey);max-width:40ch}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.cred{display:flex;gap:36px;padding-top:26px;border-top:1px solid var(--line);flex-wrap:wrap}
+.cred b{display:block;font:400 34px/1 var(--f-d)}
+.cred span{font-size:13px;color:var(--grey)}
+.strands{display:grid;grid-template-columns:repeat(6,1fr);position:relative;overflow:hidden;min-height:420px}
+.strands i{display:block;height:100%;background-size:100% 200%;animation:fall 9s ease-in-out infinite alternate}
+.strands i:nth-child(1){background-image:linear-gradient(var(--choc),var(--copper) 60%,var(--honey));animation-delay:-1s}
+.strands i:nth-child(2){background-image:linear-gradient(var(--choc),#7A4A2E 50%,var(--honey));animation-delay:-3s}
+.strands i:nth-child(3){background-image:linear-gradient(#2B2B2B,var(--ash) 70%,#ECE7DE);animation-delay:-5s}
+.strands i:nth-child(4){background-image:linear-gradient(var(--choc),var(--plum) 60%,var(--rose));animation-delay:-2s}
+.strands i:nth-child(5){background-image:linear-gradient(#1C120C,var(--choc) 50%,var(--copper));animation-delay:-4s}
+.strands i:nth-child(6){background-image:linear-gradient(#5B4632,var(--honey) 55%,#F3E2C0);animation-delay:-6s}
+@keyframes fall{from{background-position:0 0}to{background-position:0 100%}}
+.strands .pic{position:absolute;right:7%;top:9%;width:42%;aspect-ratio:3/4;object-fit:cover;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);outline:10px solid var(--paper)}
+@media (max-width:900px){.strands .pic{width:46%;top:7%}}
+.strands .lbl{position:absolute;left:24px;bottom:24px;background:var(--paper);padding:14px 18px;display:flex;flex-direction:column;gap:4px}
+.strands .lbl b{font:400 18px/1 var(--f-d);text-transform:uppercase;letter-spacing:.06em}
+.strands .lbl span{font-size:13px;color:var(--grey)}
+
+section{padding-block:104px}
+@media (max-width:700px){section{padding-block:64px}}
+.sh{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;margin-bottom:56px;align-items:end}
+@media (max-width:800px){.sh{grid-template-columns:1fr;gap:14px}}
+.sh h2{font-size:clamp(38px,5vw,72px)}
+.sh p{color:var(--grey);max-width:44ch}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 64px}
+@media (max-width:800px){.svc{grid-template-columns:1fr}}
+.svc h3{font-size:15px;letter-spacing:.26em;color:var(--grey);padding-bottom:14px;border-bottom:1px solid var(--ink);margin-top:28px}
+.li{display:grid;grid-template-columns:1fr auto;gap:2px 20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.li b{font-weight:500;font-size:17px}
+.li span{grid-column:1;font-size:14px;color:var(--grey)}
+.li em{grid-row:1/3;grid-column:2;align-self:center;font:400 22px/1 var(--f-d);font-style:normal}
+
+/* colour lab */
+.lab{background:var(--ink);color:var(--paper)}
+.lab .sh p,.lab .k{color:#A9A49B}
+.labgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+@media (max-width:860px){.labgrid{grid-template-columns:1fr}}
+.tones{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tones button{aspect-ratio:3/4;border:0;cursor:pointer;position:relative;outline-offset:3px;transition:transform .2s}
+.tones button:hover{transform:translateY(-4px)}
+.tones button[aria-pressed="true"]{outline:2px solid var(--paper)}
+.tones button span{position:absolute;left:8px;bottom:8px;font:500 10.5px/1 var(--f-b);letter-spacing:.12em;text-transform:uppercase;background:rgba(15,15,15,.75);color:#fff;padding:5px 7px}
+.readout{border:1px solid #333;padding:34px;display:flex;flex-direction:column;gap:16px;min-height:330px}
+.readout h3{font-size:clamp(30px,3.4vw,44px)}
+.readout dl{display:grid;grid-template-columns:auto 1fr;gap:10px 24px;margin:6px 0 0;font-size:15px}
+.readout dt{color:#A9A49B}.readout dd{margin:0}
+.readout .sw{height:10px;margin:-34px -34px 10px}
+
+/* editorial photo */
+.ed{margin:0 0 20px;position:relative;overflow:hidden}
+.ed img{width:100%;aspect-ratio:21/9;object-fit:cover;object-position:50% 30%;display:block;filter:grayscale(1) contrast(1.06)}
+.ed figcaption{position:absolute;left:20px;bottom:20px;background:var(--paper);padding:12px 16px;font:400 15px/1 var(--f-d);letter-spacing:.14em;text-transform:uppercase}
+@media (max-width:700px){.ed img{aspect-ratio:4/3}}
+.vph{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;margin-top:30px}
+/* press */
+.press{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:860px){.press{grid-template-columns:1fr}}
+.pc{background:var(--white);padding:30px;display:flex;flex-direction:column;gap:14px;border:1px solid var(--line)}
+.pc b{font:400 54px/1 var(--f-d)}
+.pc p{color:var(--grey);font-size:15px}
+
+.visit .w{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px}
+@media (max-width:860px){.visit .w{grid-template-columns:1fr;gap:32px}}
+.visit h2{font-size:clamp(38px,5vw,72px)}
+.info{display:grid;grid-template-columns:auto 1fr;gap:14px 32px;font-size:16px}
+.info dt{color:var(--grey);font-size:12px;letter-spacing:.2em;text-transform:uppercase;padding-top:3px}.info dd{margin:0;font-weight:500}
+footer{border-top:1px solid var(--line);padding-block:24px;font-size:13px;color:var(--grey)}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.strands i{animation:none}html{scroll-behavior:auto}}
+
+.logo small{white-space:nowrap}
+@media (max-width:560px){.logo{font-size:20px;letter-spacing:.24em}.logo small{font-size:8px;letter-spacing:.26em}}
+</style>
+</head>
+<body>
+<header><div class="w">
+  <nav><a href="#servicios" data-i="n1"></a><a href="#color" data-i="n2"></a><a href="#visita" data-i="n3"></a></nav>
+  <a class="logo" href="#top">TONO<small>COLOR ATELIER · BARCELONA</small></a>
+  <div class="langs"><button data-l="es">ES</button><button data-l="en">EN</button><button data-l="ru">RU</button></div>
+</div></header>
+
+<main id="top">
+  <div class="hero">
+    <div class="txt">
+      <span class="k" data-i="eyebrow"></span>
+      <h1 data-i="h1"></h1>
+      <p class="lede" data-i="lede"></p>
+      <div class="ctas"><button class="btn f" type="button" onclick="document.querySelector('.gw-btn')?.click()" data-i="book"></button><a class="btn" href="#servicios" data-i="prices"></a></div>
+      <div class="cred"><div><b>2016</b><span data-i="c1"></span></div><div><b>Eixample</b><span>Eixample</span></div><div><b>ES · RU · EN</b><span data-i="c3"></span></div></div>
+    </div>
+    <div class="strands" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><img class="pic" src="photos/balayage.jpg" alt="">
+      <div class="lbl"><b data-i="lblT"></b><span data-i="lblS"></span></div></div>
+  </div>
+
+  <section id="servicios"><div class="w">
+    <div class="sh"><h2 data-i="sT"></h2><p data-i="sP"></p></div>
+    <div class="svc" id="svc"></div>
+  </div></section>
+
+  <section class="lab" id="color"><div class="w">
+    <div class="sh"><div><span class="k" data-i="lCap"></span><h2 style="margin-top:14px" data-i="lT"></h2></div><p data-i="lP"></p></div>
+    <div class="labgrid">
+      <div class="tones" id="tones" role="group"></div>
+      <div class="readout" id="readout" aria-live="polite"></div>
+    </div>
+  </div></section>
+
+  <section><div class="w">
+    <div class="sh"><h2 data-i="pT"></h2><p data-i="pP"></p></div>
+    <figure class="ed"><img src="photos/stylist.jpg" alt="" loading="lazy"><figcaption data-i="edC"></figcaption></figure>
+    <div class="press">
+      <div class="pc"><b>10+</b><span class="k" data-i="pr1k"></span><p data-i="pr1"></p></div>
+      <div class="pc"><b>Color</b><span class="k" data-i="pr2k"></span><p data-i="pr2"></p></div>
+      <div class="pc"><b>1:1</b><span class="k" data-i="pr3k"></span><p data-i="pr3"></p></div>
+    </div>
+  </div></section>
+
+  <section class="visit" id="visita" style="background:var(--white)"><div class="w">
+    <div><span class="k" data-i="vCap"></span><h2 style="margin-top:14px" data-i="vT"></h2>
+      <div class="ctas" style="margin-top:30px"><button class="btn f" type="button" onclick="document.querySelector('.gw-btn')?.click()" data-i="book"></button><a class="btn" href="#" target="_blank" rel="noopener" data-i="route"></a></div><img class="vph" src="photos/salon.jpg" alt="" loading="lazy"></div>
+    <dl class="info">
+      <dt data-i="iA"></dt><dd>Eixample · Barcelona</dd>
+      <dt>Metro</dt><dd data-i="iM"></dd>
+      <dt data-i="iH"></dt><dd data-i="iHv"></dd>
+      <dt data-i="iS"></dt><dd data-i="iSv"></dd>
+      <dt data-i="iL"></dt><dd>Español · Русский · English</dd>
+    </dl>
+  </div></section>
+</main>
+<footer><div class="w"><span>© Tono Atelier · Concepto de Vitrina Studio</span><span data-i="foot"></span></div></footer>
+
+<script>
+window.T={
+ n1:{es:"Servicios",en:"Services",ru:"Услуги"},n2:{es:"Color",en:"Colour",ru:"Окрашивание"},n3:{es:"Estudio",en:"Studio",ru:"Салон"},
+ eyebrow:{es:"Color atelier · Eixample",en:"Color atelier · Eixample",ru:"Color atelier · Эшампле"},
+ h1:{es:"El color es lo nuestro",en:"Colour is what we do",ru:"Цвет — наше всё"},
+ lede:{es:"Coloración, cortes a medida y maquillaje para eventos desde 2016. Te atendemos en español, ruso o inglés, sin prisas y con diagnóstico antes de tocar un mechón.",en:"Colour, bespoke cuts and event make-up since 2016. We work in Spanish, Russian or English, never rushed, with a consultation before we touch a strand.",ru:"Окрашивание, авторские стрижки и вечерний макияж с 2016 года. Говорим по-русски, по-испански и по-английски. Сначала консультация, потом работа."},
+ book:{es:"Pedir cita",en:"Book now",ru:"Записаться"},prices:{es:"Ver precios",en:"See prices",ru:"Цены"},
+ c1:{es:"en Barcelona desde",en:"in Barcelona since",ru:"в Барселоне с"},c3:{es:"idiomas en el salón",en:"spoken in the salon",ru:"языки в салоне"},
+ lblT:{es:"Balayage cobrizo",en:"Copper balayage",ru:"Медный балаяж"},lblS:{es:"3 h · desde 140 €",en:"3 h · from €140",ru:"3 ч · от 140 €"},
+ sT:{es:"Servicios y precios",en:"Services and prices",ru:"Услуги и цены"},sP:{es:"Precios de partida según largo y densidad. El asistente te dice cuánto dura cada servicio y te busca hueco.",en:"Starting prices, depending on length and thickness. The assistant tells you how long each one takes and finds you a slot.",ru:"Цены «от», зависят от длины и густоты. Ассистент подскажет длительность и найдёт время."},
+ lCap:{es:"Laboratorio de color",en:"Colour lab",ru:"Лаборатория цвета"},lT:{es:"Elige un tono",en:"Pick a shade",ru:"Выберите оттенок"},lP:{es:"Toca un tono y verás cuánto tiempo lleva, en cuántas sesiones y qué mantenimiento necesita.",en:"Tap a shade to see how long it takes, how many sessions and what upkeep it needs.",ru:"Нажмите на оттенок: увидите время, количество сеансов и уход."},
+ edC:{es:"Detalle, siempre a mano",en:"Detail, always by hand",ru:"Каждая деталь — вручную"},
+ pT:{es:"Oficio",en:"Craft",ru:"Мастерство"},pP:{es:"Diez años de color en el mismo barrio y una clientela que vuelve.",en:"Ten years of colour in the same neighbourhood, and clients who keep coming back.",ru:"Десять лет в одном районе и клиенты, которые возвращаются."},
+ pr1k:{es:"años en Barcelona",en:"years in Barcelona",ru:"лет в Барселоне"},pr1:{es:"Abiertos desde 2016 en el corazón del Eixample.",en:"Open since 2016 in the heart of the Eixample.",ru:"Работаем с 2016 года в самом центре Эшампле."},
+ pr2k:{es:"a medida",en:"made to measure",ru:"индивидуально"},pr2:{es:"Colorimetría a medida: el tono se decide con tu piel, tu historial y la luz natural.",en:"Made-to-measure colour: the shade is chosen with your skin, your hair's history and daylight.",ru:"Цвет подбираем индивидуально: по тону кожи, истории волос и при дневном свете."},
+ pr3k:{es:"diagnóstico",en:"consultation",ru:"консультация"},pr3:{es:"Antes de cada color, una consulta: tu historial, tu tono de piel y lo que puede salir en una sesión.",en:"Before any colour, a consultation: your hair's history, your skin tone and what's realistic in one session.",ru:"Перед окрашиванием — консультация: история волос, тон кожи и что реально за один визит."},
+ vCap:{es:"Estudio",en:"Studio",ru:"Салон"},vT:{es:"En el Eixample",en:"In the Eixample",ru:"В Эшампле"},
+ iA:{es:"Dirección",en:"Address",ru:"Адрес"},iM:{es:"Urgell o Rocafort (L1), 5 min",en:"Urgell or Rocafort (L1), 5 min",ru:"Urgell или Rocafort (L1), 5 минут"},iH:{es:"Horario",en:"Hours",ru:"Часы"},iHv:{es:"Mar–vie 10:00–20:00 · Sáb 9:00–15:00",en:"Tue–Fri 10:00–20:00 · Sat 9:00–15:00",ru:"Вт–пт 10:00–20:00 · Сб 9:00–15:00"},
+ iS:{es:"Teléfono",en:"Phone",ru:"Телефон"},iSv:{es:"—",en:"—",ru:"—"},iL:{es:"Idiomas",en:"Languages",ru:"Языки"},
+ route:{es:"Cómo llegar",en:"Directions",ru:"Маршрут"},foot:{es:"Concepto de Vitrina Studio",en:"Concept by Vitrina Studio",ru:"Концепт Vitrina Studio"},
+ gCol:{es:"Color",en:"Colour",ru:"Окрашивание"},gCut:{es:"Corte",en:"Cuts",ru:"Стрижки"},gEv:{es:"Eventos",en:"Events",ru:"Мероприятия"},
+ dTime:{es:"Tiempo",en:"Time",ru:"Время"},dSess:{es:"Sesiones",en:"Sessions",ru:"Сеансы"},dKeep:{es:"Mantenimiento",en:"Upkeep",ru:"Уход"},dFrom:{es:"Desde",en:"From",ru:"От"}
+};
+const SV={gCol:[["Raíz",{es:"Color de raíz",en:"Root colour",ru:"Окрашивание корней"},"1 h 30",55],["Bal",{es:"Balayage",en:"Balayage",ru:"Балаяж"},"3 h",140],["Mech",{es:"Mechas finas",en:"Fine highlights",ru:"Мелирование"},"2 h 30",110],["Tono",{es:"Matiz y brillo",en:"Toner and gloss",ru:"Тонирование"},"45 min",40]],
+ gCut:[["CM",{es:"Corte y peinado mujer",en:"Women's cut and blow-dry",ru:"Женская стрижка и укладка"},"1 h",45],["CH",{es:"Corte hombre",en:"Men's cut",ru:"Мужская стрижка"},"40 min",25],["CN",{es:"Corte infantil",en:"Children's cut",ru:"Детская стрижка"},"30 min",18],["Rz",{es:"Rizos: corte en seco",en:"Curly cut (dry cut)",ru:"Стрижка кудрявых волос"},"1 h 15",55]],
+ gEv:[["Rec",{es:"Recogido",en:"Updo",ru:"Вечерняя причёска"},"1 h",60],["Maq",{es:"Maquillaje de evento",en:"Event make-up",ru:"Вечерний макияж"},"1 h",65],["Nov",{es:"Novia: prueba + día",en:"Bridal: trial + day",ru:"Свадебный образ: репетиция + день"},"4 h",320]]};
+const TONES=[["Cobre","Медь","#B5562B",{es:"3 h",en:"3 h",ru:"3 ч"},"1",{es:"Matiz cada 6–8 semanas",en:"Gloss every 6–8 weeks",ru:"Тонирование раз в 6–8 недель"},140],
+ ["Miel","Мёд","#D9A55B",{es:"2 h 30",en:"2 h 30",ru:"2,5 ч"},"1",{es:"Raíz cada 10 semanas",en:"Roots every 10 weeks",ru:"Корни раз в 10 недель"},110],
+ ["Ceniza","Пепельный","#B9B3A8",{es:"4 h",en:"4 h",ru:"4 ч"},"2",{es:"Champú violeta y matiz mensual",en:"Purple shampoo and a monthly toner",ru:"Фиолетовый шампунь, тонирование раз в месяц"},180],
+ ["Borgoña","Бургунди","#5B2333",{es:"2 h",en:"2 h",ru:"2 ч"},"1",{es:"Retoque cada 5–6 semanas",en:"Refresh every 5–6 weeks",ru:"Обновление раз в 5–6 недель"},85],
+ ["Chocolate","Шоколад","#3B2418",{es:"1 h 30",en:"1 h 30",ru:"1,5 ч"},"1",{es:"Raíz cada 6 semanas",en:"Roots every 6 weeks",ru:"Корни раз в 6 недель"},65],
+ ["Rosa palo","Пудровый","#C98B7E",{es:"3 h 30",en:"3 h 30",ru:"3,5 ч"},"1–2",{es:"Matiz cada 4 semanas",en:"Toner every 4 weeks",ru:"Тонирование раз в 4 недели"},160],
+ ["Rubio vainilla","Ванильный блонд","#EADBB8",{es:"4 h",en:"4 h",ru:"4 ч"},"2",{es:"Tratamiento reparador mensual",en:"Monthly bond repair",ru:"Восстановление раз в месяц"},190],
+ ["Negro azulado","Иссиня-чёрный","#16181F",{es:"1 h 30",en:"1 h 30",ru:"1,5 ч"},"1",{es:"Raíz cada 6 semanas",en:"Roots every 6 weeks",ru:"Корни раз в 6 недель"},60]];
+let tone=0;
+function render(){const l=document.documentElement.lang;
+  const sv=document.getElementById("svc");sv.textContent="";
+  Object.entries(SV).forEach(([g,rows],i)=>{const col=i===0?sv.appendChild(document.createElement("div")):(i===1?sv.appendChild(document.createElement("div")):sv.lastChild);
+    const h=document.createElement("h3");h.textContent=T[g][l];col.append(h);
+    rows.forEach(([_,n,t,p])=>{const d=document.createElement("div");d.className="li";d.innerHTML="<b></b><em></em><span></span>";d.querySelector("b").textContent=n[l];d.querySelector("span").textContent=t;d.querySelector("em").textContent=(l==="en"?"from €"+p:(l==="ru"?"от ":"desde ")+p+" €");col.append(d);});});
+  const tn=document.getElementById("tones");tn.textContent="";
+  TONES.forEach((t,i)=>{const b=document.createElement("button");b.type="button";b.style.background=t[2];b.setAttribute("aria-pressed",i===tone);b.setAttribute("aria-label",l==="ru"?t[1]:t[0]);
+    const s=document.createElement("span");s.textContent=l==="ru"?t[1]:t[0];b.append(s);b.onclick=()=>{tone=i;render();};tn.append(b);});
+  const t=TONES[tone],r=document.getElementById("readout");
+  r.innerHTML='<div class="sw"></div><span class="k"></span><h3></h3><dl><dt></dt><dd></dd><dt></dt><dd></dd><dt></dt><dd></dd><dt></dt><dd></dd></dl>';
+  r.querySelector(".sw").style.background=t[2];r.querySelector(".k").textContent=T.lCap[l];r.querySelector("h3").textContent=l==="ru"?t[1]:t[0];
+  const dd=r.querySelectorAll("dt,dd");[[T.dTime[l],t[3][l]],[T.dSess[l],t[4]],[T.dKeep[l],t[5][l]],[T.dFrom[l],t[6]+" €"]].forEach(([a,b],i)=>{dd[i*2].textContent=a;dd[i*2+1].textContent=b;});
+}
+new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+</script>
+<script src="../shared/i18n.js"></script>
+<script src="../shared/slots.js"></script>
+<script src="assistant-config.js"></script>
+<script src="../shared/assistant.js"></script>
+<script src="photos/credits.js"></script>
+<script src="../shared/credits.js"></script>
+<script>render();</script>
+<script src="../shared/motion.js" data-accent="#D9A55B" data-bg="#0F0F0F" data-fg="#F2EEE8" data-name="Tono" data-photos="balayage.jpg,salon.jpg,stylist.jpg"></script>
+</body>
+</html>

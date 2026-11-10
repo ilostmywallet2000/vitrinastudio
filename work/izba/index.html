@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es" data-default="es">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Izba · Tienda de Europa del Este</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kurale&family=Oswald:wght@600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,800&display=swap">
+<style>
+/* Izba's own brand: Khokhloma lacquer, red, gold and black, with bold yellow lettering. The neighbourhood shop where six communities meet. */
+:root{
+  --pine:#FBF3E3; --wood:#E0A526; --wood-d:#1B1210; --ink:#22140F; --muted:#6B5546; --red:#C4161C; --gold:#F6C935; --green:#3F6B45; --white:#FFFDF8; --line:#EED9B3;
+  --f-d:"Kurale",Georgia,serif; --f-b:"Nunito Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--pine);color:var(--ink);font:400 17px/1.6 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--f-d);font-weight:400;margin:0;line-height:1.05;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.w{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.k{font:800 12px/1 var(--f-b);letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:14px;font:800 15px/1 var(--f-b);text-decoration:none;border:2px solid var(--wood-d);color:var(--wood-d);background:none;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:var(--wood-d);color:var(--pine)}
+.btn.f{background:var(--red);border-color:var(--red);color:#fff}.btn.f:hover{background:#9C2820}
+/* embroidered border: rushnyk-style cross-stitch rhombs */
+.stitch{display:none;height:22px;background:
+  conic-gradient(from 45deg at 50% 50%,var(--red) 0 25%,transparent 0 50%,var(--red) 0 75%,transparent 0) 0 0/22px 22px,var(--white);
+  -webkit-mask:radial-gradient(circle at 50% 50%,#000 0 6px,transparent 6.5px) 0 0/22px 22px;mask:radial-gradient(circle at 50% 50%,#000 0 6px,transparent 6.5px) 0 0/22px 22px}
+.stitchband{height:30px;background:radial-gradient(circle at 50% 50%,var(--gold) 0 4px,transparent 4.5px) 0 0/30px 30px,radial-gradient(circle at 50% 50%,transparent 0 9px,var(--gold) 9.5px 11px,transparent 11.5px) 15px 15px/30px 30px,var(--red);border-block:3px solid var(--wood-d)}
+header .w{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:16px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo svg{width:40px;height:44px}
+.logo b{font:700 26px/1 "Oswald",Impact,sans-serif;letter-spacing:.06em;color:var(--gold);background:var(--red);padding:6px 12px 7px;border-radius:6px;text-shadow:0 2px 0 var(--wood-d)}
+.logo small{display:block;font:800 10px/1 var(--f-b);letter-spacing:.2em;color:var(--muted);margin-top:4px}
+nav{display:flex;gap:24px;font-weight:600;font-size:15px}nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--red)}
+.langs{display:flex;gap:4px;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:4px}
+.langs button{border:0;background:none;font:800 12px/1 var(--f-b);padding:7px 9px;border-radius:8px;cursor:pointer;color:var(--muted)}
+.langs button[aria-pressed="true"]{background:var(--wood-d);color:var(--pine)}
+@media (max-width:860px){nav{display:none}}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:52px;align-items:center;padding-block:56px 84px}
+@media (max-width:900px){.hero{grid-template-columns:1fr;padding-block:30px 60px;gap:36px}}
+.hero h1{font-size:clamp(46px,6.4vw,92px)}
+.hero h1 em{font-style:normal;color:var(--red)}
+.lede{font-size:19px;color:var(--muted);max-width:44ch;margin-top:22px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hellos{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.hellos span{background:var(--white);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-weight:600;font-size:14px}
+.hellos span b{color:var(--red);font-weight:800;margin-right:6px}
+/* carved window */
+.win{position:relative;max-width:440px;width:100%;justify-self:center}
+.win svg{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 40px rgba(107,62,31,.28))}
+
+section{padding-block:96px}
+@media (max-width:700px){section{padding-block:64px}}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:44px}
+.sh h2{font-size:clamp(38px,5vw,66px);max-width:14ch}
+.sh p{color:var(--muted);max-width:44ch}
+
+/* communities */
+.comm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.comm{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.comm{grid-template-columns:1fr}}
+.cc{background:var(--white);border:1px solid var(--line);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.cc .ph{margin:-24px -24px 6px;height:170px;overflow:hidden;border-radius:22px 22px 0 0}
+.cc .ph img,.ar img{width:100%;height:100%;object-fit:cover;display:block}
+.ar .im{margin:-20px -20px 6px;height:140px;overflow:hidden;border-radius:18px 18px 0 0}
+.vph{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:22px;margin-top:24px;display:block}
+.cc .top{display:flex;justify-content:space-between;align-items:center}
+.cc .flag{font-size:28px;line-height:1}
+.cc .hi{font:400 22px/1 var(--f-d);color:var(--red)}
+.cc h3{font-size:26px}
+.cc p{color:var(--muted);font-size:15px}
+.cc ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.cc li{background:var(--pine);border-radius:8px;padding:5px 9px;font-size:13px;font-weight:600}
+
+/* this week */
+.week{background:var(--wood-d);color:var(--pine);border-top:4px solid var(--gold)}
+.week .sh p{color:#E9D6B8}.week .k{color:var(--gold)}
+.arr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:900px){.arr{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ar{border:1px solid rgba(246,235,221,.25);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.ar .d{font:800 12px/1 var(--f-b);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.ar h3{font-size:22px}
+.ar p{color:#E3CDB5;font-size:14.5px}
+.alert{margin-top:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:rgba(246,235,221,.08);border:1px dashed rgba(246,235,221,.35);border-radius:18px;padding:20px 24px}
+.alert p{max-width:60ch}
+.alert .btn{border-color:var(--pine);color:var(--pine)}.alert .btn:hover{background:var(--pine);color:var(--wood-d)}
+
+.visit .w{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+@media (max-width:860px){.visit .w{grid-template-columns:1fr}}
+.visit h2{font-size:clamp(38px,5vw,66px)}
+.info{background:var(--white);border:1px solid var(--line);border-radius:22px;padding:28px;display:grid;grid-template-columns:auto 1fr;gap:14px 26px;align-self:start}
+.info dt{color:var(--muted);font-weight:600}.info dd{margin:0;font-weight:800}
+footer{padding-block:24px;font-size:13px;color:var(--muted)}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+:focus-visible{outline:3px solid var(--wood);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* header fix: badge and tagline never touch */
+.logo b{display:inline-block}
+.logo small{margin-top:8px;white-space:nowrap}
+@media (max-width:560px){.logo{gap:9px}.logo svg{width:32px;height:36px}.logo b{font-size:20px;padding:5px 10px 6px}.logo small{font-size:8.5px;letter-spacing:.14em;margin-top:6px}}
+</style>
+</head>
+<body>
+<header><div class="w">
+  <a class="logo" href="#top"><svg viewBox="0 0 40 44" aria-hidden="true"><path d="M20 2 L37 16 V42 H3 V16 Z" fill="#C4161C"/><path d="M20 2 L37 16 H3 Z" fill="#1B1210"/><rect x="13" y="22" width="14" height="14" rx="7" fill="#F6EBDD"/><path d="M20 22 V36 M13 29 H27" stroke="#E0A526" stroke-width="2"/></svg><span><b>IZBA</b><small>GRÀCIA · BARCELONA</small></span></a>
+  <nav><a href="#casa" data-i="n1"></a><a href="#semana" data-i="n2"></a><a href="#visita" data-i="n3"></a></nav>
+  <div class="langs"><button data-l="es">ES</button><button data-l="en">EN</button><button data-l="ru">RU</button></div>
+</div></header>
+<div class="stitchband"><div class="stitch"></div></div>
+
+<main id="top">
+  <div class="w hero">
+    <div>
+      <span class="k" data-i="eyebrow"></span>
+      <h1 style="margin-top:16px" data-ih="h1"></h1>
+      <p class="lede" data-i="lede"></p>
+      <div class="ctas"><button class="btn f" type="button" onclick="document.querySelector('.gw-btn')?.click()" data-i="ask"></button><a class="btn" href="#semana" data-i="new"></a></div>
+      <div class="hellos" aria-label="Hello"><span><b>UA</b>Привіт</span><span><b>GE</b>გამარჯობა</span><span><b>PL</b>Cześć</span><span><b>BY</b>Вітаю</span><span><b>EE</b>Tere</span><span><b>RU</b>Привет</span></div>
+    </div>
+    <div class="win" aria-hidden="true">
+      <svg viewBox="0 0 400 480">
+        <!-- carved nalichnik window frame -->
+        <path d="M40 120 Q200 -10 360 120 L360 150 L40 150 Z" fill="#1B1210"/>
+        <path d="M70 128 Q200 30 330 128" fill="none" stroke="#F6EBDD" stroke-width="5" stroke-dasharray="2 12" stroke-linecap="round"/>
+        <circle cx="200" cy="72" r="16" fill="#E0A526"/><circle cx="200" cy="72" r="7" fill="#F6EBDD"/>
+        <rect x="40" y="150" width="320" height="270" fill="#C4161C"/>
+        <rect x="72" y="176" width="256" height="216" rx="6" fill="#2A1C14"/>
+        <rect x="82" y="186" width="114" height="196" fill="#F6C935"/><rect x="204" y="186" width="114" height="196" fill="#F6C935"/>
+        <g fill="#E0A526"><circle cx="139" cy="248" r="26"/><circle cx="261" cy="300" r="22"/></g>
+        <g fill="#3F6B45"><path d="M118 300 h42 v40 h-42z"/><path d="M236 220 h50 v30 h-50z"/></g>
+        <g fill="#FFFDF9"><rect x="106" y="352" width="66" height="14" rx="3"/><rect x="228" y="352" width="66" height="14" rx="3"/></g>
+        <path d="M200 186 V382" stroke="#1B1210" stroke-width="10"/>
+        <path d="M30 420 H370 L350 460 H50 Z" fill="#1B1210"/>
+        <g fill="#F6EBDD"><circle cx="90" cy="440" r="6"/><circle cx="150" cy="440" r="6"/><circle cx="200" cy="440" r="6"/><circle cx="250" cy="440" r="6"/><circle cx="310" cy="440" r="6"/></g>
+        <g fill="#1B1210"><path d="M40 150 l-18 30 l18 30z"/><path d="M40 230 l-18 30 l18 30z"/><path d="M40 310 l-18 30 l18 30z"/><path d="M360 150 l18 30 l-18 30z"/><path d="M360 230 l18 30 l-18 30z"/><path d="M360 310 l18 30 l-18 30z"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <section id="casa" style="padding-top:20px"><div class="w">
+    <div class="sh"><h2 data-i="cT"></h2><p data-i="cP"></p></div>
+    <div class="comm" id="comm"></div>
+  </div></section>
+
+  <section class="week" id="semana"><div class="w">
+    <div class="sh"><div><span class="k" data-i="wCap"></span><h2 style="margin-top:14px" data-i="wT"></h2></div><p data-i="wP"></p></div>
+    <div class="arr">
+      <div class="ar"><div class="im"><img src="photos/bread.jpg" alt="" loading="lazy"></div><span class="d" data-i="d1"></span><h3 data-i="a1"></h3><p data-i="a1p"></p></div>
+      <div class="ar"><div class="im"><img src="photos/churchkhela.jpg" alt="" loading="lazy"></div><span class="d" data-i="d2"></span><h3 data-i="a2"></h3><p data-i="a2p"></p></div>
+      <div class="ar"><div class="im"><img src="photos/pierogi.jpg" alt="" loading="lazy"></div><span class="d" data-i="d3"></span><h3 data-i="a3"></h3><p data-i="a3p"></p></div>
+      <div class="ar"><div class="im"><img src="photos/salo.jpg" alt="" loading="lazy"></div><span class="d" data-i="d4"></span><h3 data-i="a4"></h3><p data-i="a4p"></p></div>
+    </div>
+    <div class="alert"><p data-i="alP"></p><button class="btn" type="button" onclick="document.querySelector('.gw-btn')?.click()" data-i="alB"></button></div>
+  </div></section>
+  <div class="stitchband"><div class="stitch"></div></div>
+
+  <section class="visit" id="visita"><div class="w">
+    <div><span class="k" data-i="vCap"></span><h2 style="margin-top:14px" data-i="vT"></h2><p style="color:var(--muted);margin-top:16px;max-width:42ch" data-i="vP"></p>
+      <div class="ctas"><a class="btn" href="#" target="_blank" rel="noopener" data-i="route"></a></div><img class="vph" src="photos/shop.jpg" alt="" loading="lazy"></div>
+    <dl class="info">
+      <dt data-i="iA"></dt><dd>Gràcia · Barcelona</dd>
+      <dt>Metro</dt><dd data-i="iM"></dd>
+      <dt data-i="iH"></dt><dd data-i="iHv"></dd>
+      <dt data-i="iL"></dt><dd data-i="iLv"></dd>
+    </dl>
+  </div></section>
+</main>
+<footer><div class="w"><span>© Izba · Concepto de Vitrina Studio</span><span data-i="foot"></span></div></footer>
+
+<script>
+window.T={
+ n1:{es:"De dónde",en:"Where from",ru:"Откуда"},n2:{es:"Esta semana",en:"This week",ru:"На этой неделе"},n3:{es:"Visítanos",en:"Visit",ru:"Адрес"},
+ eyebrow:{es:"Tienda de barrio · Gràcia",en:"Neighbourhood shop · Gràcia",ru:"Магазин у дома · Грасия"},
+ h1:{es:"Una casita con <em>seis</em> cocinas dentro",en:"One little house, <em>six</em> kitchens inside",ru:"Один изба, <em>шесть</em> кухонь"},
+ lede:{es:"Ucrania, Georgia, Polonia, Bielorrusia, Estonia y Rusia en una sola tienda de Gràcia. Aquí se compra, se charla y se encarga lo que echas de menos.",en:"Ukraine, Georgia, Poland, Belarus, Estonia and Russia in one shop in Gràcia. People shop here, chat here, and order what they miss from home.",ru:"Украина, Грузия, Польша, Беларусь, Эстония и Россия в одном магазине в Грасии. Здесь покупают, общаются и заказывают то, по чему скучают."},
+ ask:{es:"Pregunta en tu idioma",en:"Ask in your language",ru:"Спросите на своём языке"},new:{es:"Qué llega esta semana",en:"What's arriving",ru:"Что привезут"},
+ cT:{es:"Seis casas, una tienda",en:"Six homes, one shop",ru:"Шесть домов, один магазин"},cP:{es:"Cada comunidad tiene su estante. Si falta algo, lo pedimos en el siguiente camión.",en:"Every community has its shelf. If something's missing, we add it to the next truck.",ru:"У каждой общины своя полка. Если чего-то нет, закажем со следующей машиной."},
+ wCap:{es:"Llegadas",en:"Arrivals",ru:"Поставки"},wT:{es:"Esta semana en Izba",en:"This week at Izba",ru:"На этой неделе"},wP:{es:"El camión llega los martes y los viernes. Lo fresco vuela el mismo día.",en:"The truck comes on Tuesdays and Fridays. Fresh things sell out the same day.",ru:"Машина приходит по вторникам и пятницам. Свежее разбирают в тот же день."},
+ d1:{es:"Martes",en:"Tuesday",ru:"Вторник"},a1:{es:"Pan de centeno Borodinsky",en:"Borodinsky rye bread",ru:"Бородинский хлеб"},a1p:{es:"Con cilantro, horneado en Lituania.",en:"With coriander, baked in Lithuania.",ru:"С кориандром, литовская пекарня."},
+ d2:{es:"Martes",en:"Tuesday",ru:"Вторник"},a2:{es:"Churchkhela y tkemali",en:"Churchkhela and tkemali",ru:"Чурчхела и ткемали"},a2p:{es:"Lo dulce y lo ácido de Georgia.",en:"Georgia's sweet and sour.",ru:"Грузинское сладкое и кислое."},
+ d3:{es:"Viernes",en:"Friday",ru:"Пятница"},a3:{es:"Kiełbasa y pierogi",en:"Kiełbasa and pierogi",ru:"Колбаса и вареники по-польски"},a3p:{es:"Embutido ahumado y pierogi ruskie congelados.",en:"Smoked sausage and frozen pierogi ruskie.",ru:"Копчёная колбаса и замороженные pierogi."},
+ d4:{es:"Viernes",en:"Friday",ru:"Пятница"},a4:{es:"Salo y syrok",en:"Salo and syrok",ru:"Сало и сырки"},a4p:{es:"Tocino curado ucraniano y barritas de requesón glaseadas.",en:"Ukrainian cured fatback and glazed curd bars.",ru:"Украинское сало и глазированные сырки."},
+ alP:{es:"¿Esperas algo concreto? Díselo al asistente y te avisamos por WhatsApp en cuanto llegue.",en:"Waiting for something specific? Tell the assistant and we'll message you on WhatsApp the moment it arrives.",ru:"Ждёте что-то конкретное? Скажите ассистенту, и мы напишем в WhatsApp, как только привезут."},alB:{es:"Avísame cuando llegue",en:"Tell me when it arrives",ru:"Сообщить о поступлении"},
+ vCap:{es:"Visítanos",en:"Visit us",ru:"Ждём в гости"},vT:{es:"En Gràcia",en:"In Gràcia",ru:"В Грасии"},vP:{es:"Entre Verdaguer y Travessera de Gràcia. Pasa, aunque solo sea a por pan.",en:"Between Verdaguer and Travessera de Gràcia. Drop in, even if it's just for bread.",ru:"Между Вердагер и Травесера де Грасия. Заходите, даже просто за хлебом."},
+ iA:{es:"Dirección",en:"Address",ru:"Адрес"},iM:{es:"Verdaguer (L4/L5) o Joanic (L4)",en:"Verdaguer (L4/L5) or Joanic (L4)",ru:"Verdaguer (L4/L5) или Joanic (L4)"},iH:{es:"Horario",en:"Hours",ru:"Часы"},iHv:{es:"Todos los días desde las 10:00",en:"Every day from 10:00",ru:"Ежедневно с 10:00"},
+ iL:{es:"Te atendemos en",en:"We speak",ru:"Говорим на"},iLv:{es:"ES · RU · UA · PL · EN",en:"ES · RU · UA · PL · EN",ru:"ES · RU · UA · PL · EN"},
+ route:{es:"Cómo llegar",en:"Directions",ru:"Маршрут"},foot:{es:"Concepto de Vitrina Studio",en:"Concept by Vitrina Studio",ru:"Концепт Vitrina Studio"}
+};
+const C=[["🇺🇦","Привіт",{es:"Ucrania",en:"Ukraine",ru:"Украина"},{es:"Salo, varenyky, pan negro y dulces Roshen.",en:"Salo, varenyky, dark bread and Roshen sweets.",ru:"Сало, вареники, чёрный хлеб и конфеты Roshen."},["Salo","Varenyky","Roshen","Kvas"]],
+ ["🇬🇪","გამარჯობა",{es:"Georgia",en:"Georgia",ru:"Грузия"},{es:"Vino de qvevri, tkemali, adjika y churchkhela.",en:"Qvevri wine, tkemali, adjika and churchkhela.",ru:"Вино из квеври, ткемали, аджика и чурчхела."},["Saperavi","Tkemali","Adjika","Borjomi"]],
+ ["🇵🇱","Cześć",{es:"Polonia",en:"Poland",ru:"Польша"},{es:"Pierogi, kiełbasa, ogórki kiszone y Ptasie Mleczko.",en:"Pierogi, kiełbasa, ogórki kiszone and Ptasie Mleczko.",ru:"Пироги, колбаса, солёные огурцы, «Птичье молоко»."},["Pierogi","Kiełbasa","Żurek","Prince Polo"]],
+ ["🇧🇾","Вітаю",{es:"Bielorrusia",en:"Belarus",ru:"Беларусь"},{es:"Lácteos Savushkin, draniki congelados y sgushchenka.",en:"Savushkin dairy, frozen draniki and condensed milk.",ru:"Молочка «Савушкин», драники и сгущёнка."},["Tvorog","Smetana","Draniki","Syrok"]],
+ ["🇪🇪","Tere",{es:"Estonia",en:"Estonia",ru:"Эстония"},{es:"Pan de centeno, kama y espadines.",en:"Rye bread, kama flour and sprats.",ru:"Ржаной хлеб, кама и кильки."},["Leib","Kama","Kilu","Vana Tallinn"]],
+ ["🇷🇺","Привет",{es:"Rusia",en:"Russia",ru:"Россия"},{es:"Alforfón, pelmeni, pryaniki y chocolate Alionka.",en:"Buckwheat, pelmeni, pryaniki and Alionka chocolate.",ru:"Гречка, пельмени, пряники и «Алёнка»."},["Grechka","Pelmeni","Pryaniki","Alionka"]]];
+function render(){const l=document.documentElement.lang,box=document.getElementById("comm");box.textContent="";
+  C.forEach(([f,hi,n,d,tags])=>{const a=document.createElement("article");a.className="cc";a.innerHTML='<div class="ph"><img alt="" loading="lazy"></div><div class="top"><span class="flag"></span><span class="hi"></span></div><h3></h3><p></p><ul></ul>';
+    a.querySelector(".ph img").src="photos/"+["ua","ge","pl","by","ee","ru"][C.findIndex(x=>x[1]===hi)]+".jpg";a.querySelector(".flag").textContent=f;a.querySelector(".hi").textContent=hi;a.querySelector("h3").textContent=n[l];a.querySelector("p").textContent=d[l];
+    tags.forEach(t=>{const li=document.createElement("li");li.textContent=t;a.querySelector("ul").append(li);});box.append(a);});}
+new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+</script>
+<script src="../shared/i18n.js"></script>
+<script src="../shared/slots.js"></script>
+<script src="assistant-config.js"></script>
+<script src="../shared/assistant.js"></script>
+<script src="photos/credits.js"></script>
+<script src="../shared/credits.js"></script>
+<script>render();</script>
+<script src="../shared/motion.js" data-accent="#F6C935" data-bg="#C4161C" data-fg="#FFF6E0" data-name="Izba" data-photos="bread.jpg,by.jpg,churchkhela.jpg,ee.jpg,ge.jpg,pierogi.jpg,pl.jpg,ru.jpg,salo.jpg,shop.jpg,ua.jpg"></script>
+</body>
+</html>

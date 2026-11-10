@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es" data-default="es">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Polka · Tienda rusa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* A grocery shelf: printed labels, price tags, three colours of ink. Products are the pictures. */
+:root{
+  --paper:#FFFFFF; --shelf:#F2F0EA; --ink:#14213D; --red:#D33A2C; --mustard:#F2B33D; --green:#2F6B4F; --muted:#59617A; --line:#E1DED4;
+  --f-d:"Unbounded",system-ui,sans-serif; --f-b:"IBM Plex Sans",system-ui,sans-serif; --f-m:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16.5px/1.55 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--f-d);font-weight:800;margin:0;line-height:1;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.w{max-width:1220px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.tag{font:500 12px/1 var(--f-m);letter-spacing:.08em;text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:12px;font:600 15px/1 var(--f-b);text-decoration:none;border:2px solid var(--ink);color:var(--ink);background:var(--paper);cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn.r{background:var(--red);color:#fff}
+.strip{background:var(--ink);color:#fff;font:500 13px/1 var(--f-m);letter-spacing:.06em;overflow:hidden;white-space:nowrap}
+.strip div{display:inline-flex;gap:40px;padding:11px 0;animation:mq 40s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+header .w{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo .mk{display:flex;gap:3px}
+.logo .mk i{width:10px;height:30px;border-radius:5px;background:var(--red)}
+.logo .mk i:nth-child(2){background:var(--mustard)}.logo .mk i:nth-child(3){background:var(--green)}
+.logo b{font:800 22px/1 var(--f-d);letter-spacing:-.02em}
+.logo small{display:block;font:500 10.5px/1 var(--f-m);letter-spacing:.16em;color:var(--muted);margin-top:4px}
+nav{display:flex;gap:24px;font-weight:500;font-size:15px}nav a{text-decoration:none}
+.langs{display:flex;border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+.langs button{border:0;background:none;font:500 12px/1 var(--f-m);padding:8px 10px;cursor:pointer;color:var(--ink)}
+.langs button[aria-pressed="true"]{background:var(--ink);color:#fff}
+@media (max-width:860px){nav{display:none}}
+
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:56px 80px}
+@media (max-width:900px){.hero{grid-template-columns:1fr;padding-block:32px 60px}}
+.hero h1{font-size:clamp(44px,6.6vw,96px)}
+.hero h1 span{color:var(--red)}
+.hero .lede{font-size:19px;color:var(--muted);max-width:44ch;margin-top:24px}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.origins{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+.origins span{border:1.5px solid var(--ink);border-radius:99px;padding:7px 13px;font:500 12.5px/1 var(--f-m)}
+
+/* drawn shelf */
+.shelfart{background:var(--shelf);border-radius:28px;padding:34px 26px 0;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden}
+.row{display:flex;align-items:flex-end;justify-content:center;gap:12px;padding:0 6px;min-height:180px;border-bottom:14px solid #C9B48F;position:relative}
+.row+.row{margin-top:30px}
+.p{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;font:800 11px/1.05 var(--f-d);color:#fff;letter-spacing:.02em;box-shadow:inset -8px 0 0 rgba(0,0,0,.12)}
+.jar{width:84px;height:110px;border-radius:12px 12px 16px 16px;background:#F7F3EA;color:var(--ink);border:3px solid var(--ink)}
+.jar::before{content:"";position:absolute;top:-16px;left:8px;right:8px;height:16px;background:var(--red);border-radius:6px 6px 0 0}
+.tin{width:78px;height:96px;border-radius:10px;background:linear-gradient(var(--mustard) 0 24%,#1E3A8A 24% 76%,var(--mustard) 76%)}
+.bottle{width:52px;height:166px;border-radius:24px 24px 10px 10px/40px 40px 10px 10px;background:#2F6B4F}
+.bottle::before{content:"";position:absolute;top:-18px;width:22px;height:22px;background:#2F6B4F;border-radius:4px}
+.box{width:110px;height:84px;border-radius:6px;background:var(--red)}
+.box.y{background:var(--mustard);color:var(--ink);width:90px;height:130px}
+.bag{width:96px;height:140px;border-radius:14px 14px 8px 8px;background:#F7F3EA;color:var(--ink);border:3px solid var(--ink);clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)}
+.price{position:absolute;bottom:-46px;left:50%;transform:translateX(-50%);background:#fff;border:1.5px solid var(--ink);font:500 11px/1 var(--f-m);padding:5px 7px;border-radius:4px;color:var(--ink);white-space:nowrap;box-shadow:none}
+@media (max-width:520px){.p.hide-s{display:none}}
+
+section{padding-block:96px}
+@media (max-width:700px){section{padding-block:64px}}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:44px}
+.sh h2{font-size:clamp(36px,5vw,64px);max-width:14ch}
+.sh p{color:var(--muted);max-width:44ch}
+
+/* catalogue */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.filters button{border:1.5px solid var(--ink);background:#fff;border-radius:99px;padding:9px 15px;font:500 13px/1 var(--f-m);cursor:pointer;color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.item{border:1.5px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:6px;background:#fff;transition:border-color .2s,transform .2s}
+.item:hover{border-color:var(--ink);transform:translateY(-3px)}
+.item .sw{height:120px;border-radius:12px;margin-bottom:8px;display:grid;place-items:center;font:800 15px/1 var(--f-d);color:#fff;text-align:center;padding:8px}
+.item .sw.ph{background-size:cover!important;background-position:center!important;font-size:0}
+.item h3{font:600 16px/1.25 var(--f-b);letter-spacing:0}
+.item .o{font:500 11.5px/1 var(--f-m);color:var(--muted);letter-spacing:.04em}
+.item .bt{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px}
+.item .pr{font:800 17px/1 var(--f-d)}
+.st{font:500 11px/1 var(--f-m);padding:5px 8px;border-radius:6px}
+.st.in{background:#E3F1E8;color:var(--green)}.st.lo{background:#FCEFD3;color:#8A5A00}.st.fr{background:#E3EAF8;color:#1E3A8A}
+
+/* how to order */
+.how{background:var(--shelf)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+.step{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:26px;box-shadow:6px 6px 0 var(--ink);display:flex;flex-direction:column;gap:10px}
+.step .n{font:800 40px/1 var(--f-d);color:var(--red)}
+.step h3{font-size:22px}
+.step p{color:var(--muted);font-size:15px}
+
+/* gifts */
+.gifts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:860px){.gifts{grid-template-columns:1fr}}
+.gift{border-radius:22px;padding:28px;color:#fff;display:flex;flex-direction:column;gap:12px;min-height:280px;position:relative;overflow:hidden}
+.gift::after{content:"";position:absolute;right:-30px;top:-30px;width:130px;height:130px;border:14px solid rgba(255,255,255,.18);border-radius:50%}
+.gift h3{font-size:26px}
+.gift p{opacity:.85;font-size:15px;max-width:30ch}
+.gift b{margin-top:auto;font:800 30px/1 var(--f-d)}
+.g1{background:var(--red)}.g2{background:var(--ink)}.g3{background:var(--green)}
+
+.visit .w{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+@media (max-width:860px){.visit .w{grid-template-columns:1fr}}
+.visit h2{font-size:clamp(36px,5vw,64px)}
+.vph{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:22px;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);margin-top:20px;display:block}
+.card{border:2px solid var(--ink);border-radius:22px;padding:26px;display:grid;grid-template-columns:auto 1fr;gap:12px 24px;box-shadow:6px 6px 0 var(--ink)}
+.card dt{font:500 12px/1.6 var(--f-m);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.card dd{margin:0;font-weight:600}
+footer{border-top:1.5px solid var(--line);padding-block:24px;font-size:13px;color:var(--muted)}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.strip div{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="strip" aria-hidden="true"><div id="strip"></div></div>
+<header><div class="w">
+  <a class="logo" href="#top"><span class="mk"><i></i><i></i><i></i></span><span><b>POLKA</b><small>DELICATESSEN · RAVAL</small></span></a>
+  <nav><a href="#tienda" data-i="n1"></a><a href="#pedido" data-i="n2"></a><a href="#regalos" data-i="n3"></a><a href="#visita" data-i="n4"></a></nav>
+  <div class="langs"><button data-l="es">ES</button><button data-l="en">EN</button><button data-l="ru">RU</button></div>
+</div></header>
+
+<main id="top">
+  <div class="w hero">
+    <div>
+      <span class="tag" style="color:var(--red)" data-i="eyebrow"></span>
+      <h1 style="margin-top:16px" data-ih="h1"></h1>
+      <p class="lede" data-i="lede"></p>
+      <div class="ctas"><button class="btn r" type="button" onclick="document.querySelector('.gw-btn')?.click()" data-i="ask"></button><a class="btn" href="#tienda" data-i="browse"></a></div>
+      <div class="origins"><span>🇷🇺 RU</span><span>🇺🇦 UA</span><span>🇦🇲 AM</span><span>🇬🇪 GE</span><span>🇱🇹 LT</span></div>
+    </div>
+    <div class="shelfart" aria-hidden="true">
+      <div class="row">
+        <div class="p jar">TVOROG<br>9%<span class="price">3,90 €</span></div>
+        <div class="p tin">СГУЩЁНКА<span class="price">2,80 €</span></div>
+        <div class="p bottle hide-s"><span class="price">1,95 €</span></div>
+        <div class="p box">ПРЯНИКИ<span class="price">3,50 €</span></div>
+      </div>
+      <div class="row">
+        <div class="p bag">ГРЕЧКА<br>900 g<span class="price">3,20 €</span></div>
+        <div class="p box y">ПЕЛЬМЕНИ<br>1 kg<span class="price">8,90 €</span></div>
+        <div class="p jar hide-s">KEFIR<span class="price">2,40 €</span></div>
+        <div class="p tin">ШПРОТЫ<span class="price">3,60 €</span></div>
+      </div>
+      <div style="height:46px"></div>
+    </div>
+  </div>
+
+  <section id="tienda" style="padding-top:40px"><div class="w">
+    <div class="sh"><h2 data-i="cT"></h2><p data-i="cP"></p></div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div></section>
+
+  <section class="how" id="pedido"><div class="w">
+    <div class="sh"><h2 data-i="hT"></h2><p data-i="hP"></p></div>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><h3 data-i="s1t"></h3><p data-i="s1p"></p></div>
+      <div class="step"><span class="n">2</span><h3 data-i="s2t"></h3><p data-i="s2p"></p></div>
+      <div class="step"><span class="n">3</span><h3 data-i="s3t"></h3><p data-i="s3p"></p></div>
+    </div>
+  </div></section>
+
+  <section id="regalos"><div class="w">
+    <div class="sh"><h2 data-i="gT"></h2><p data-i="gP"></p></div>
+    <div class="gifts">
+      <article class="gift g1"><span class="tag" data-i="g1c"></span><h3 data-i="g1t"></h3><p data-i="g1p"></p><b>35 €</b></article>
+      <article class="gift g2"><span class="tag" data-i="g2c"></span><h3 data-i="g2t"></h3><p data-i="g2p"></p><b>25 €</b></article>
+      <article class="gift g3"><span class="tag" data-i="g3c"></span><h3 data-i="g3t"></h3><p data-i="g3p"></p><b>40 €</b></article>
+    </div>
+  </div></section>
+
+  <section class="visit" id="visita" style="padding-top:20px"><div class="w">
+    <div><span class="tag" style="color:var(--red)" data-i="vCap"></span><h2 style="margin-top:14px" data-i="vT"></h2><p style="color:var(--muted);margin-top:18px;max-width:42ch" data-i="vP"></p>
+      <div class="ctas"><a class="btn" href="#" target="_blank" rel="noopener" data-i="route"></a></div></div>
+    <div><dl class="card">
+      <dt data-i="iA"></dt><dd>Raval · Barcelona</dd>
+      <dt>Metro</dt><dd data-i="iM"></dd>
+      <dt data-i="iH"></dt><dd data-i="iHv"></dd>
+      <dt data-i="iS"></dt><dd data-i="iSv"></dd>
+    </dl><img class="vph" src="photos/shelf.jpg" alt="" loading="lazy"></div>
+  </div></section>
+</main>
+<footer><div class="w"><span>© Polka · Tienda rusa</span><span data-i="foot"></span></div></footer>
+
+<script>
+window.T={
+ n1:{es:"Tienda",en:"Shop",ru:"Магазин"},n2:{es:"Encargos",en:"Pre-order",ru:"Заказ"},n3:{es:"Regalos",en:"Gifts",ru:"Подарки"},n4:{es:"Dónde estamos",en:"Find us",ru:"Адрес"},
+ eyebrow:{es:"Tienda rusa · a un paso de la Rambla",en:"Russian shop · steps from La Rambla",ru:"Русский магазин · у Рамблы"},
+ h1:{es:"Los sabores <span>de casa</span>, en el Raval",en:"The taste <span>of home</span>, in the Raval",ru:"Вкус <span>дома</span> в самом центре"},
+ lede:{es:"Productos de Rusia, Ucrania, Armenia y Georgia: tvorog, alforfón, pelmeni congelados, dulces, libros y revistas. Pregunta si lo tenemos y te lo guardamos.",en:"Food from Russia, Ukraine, Armenia and Georgia: tvorog, buckwheat, frozen pelmeni, sweets, books and magazines. Ask if it's in stock and we'll put it aside.",ru:"Продукты из России, Украины, Армении и Грузии: творог, гречка, пельмени, сладости, книги и журналы. Спросите, есть ли нужное, и мы отложим."},
+ ask:{es:"¿Lo tenéis? Pregunta",en:"Got it? Ask us",ru:"Есть в наличии? Спросить"},browse:{es:"Ver productos",en:"Browse products",ru:"Смотреть товары"},
+ cT:{es:"En la estantería",en:"On the shelves",ru:"На полках"},cP:{es:"Una muestra de lo que suele haber. El stock cambia cada semana: el asistente te dice qué ha llegado.",en:"A sample of what's usually in. Stock changes every week, so ask the assistant what's arrived.",ru:"Часть ассортимента. Наличие меняется каждую неделю, уточняйте у ассистента."},
+ hT:{es:"Encarga y recoge",en:"Order ahead, pick up",ru:"Закажите и заберите"},hP:{es:"Sin colas ni sorpresas: te guardamos el pedido hasta el día siguiente.",en:"No queue, no surprises: we keep your order until the next day.",ru:"Без очередей: отложим заказ до следующего дня."},
+ s1t:{es:"Escribe lo que buscas",en:"Say what you need",ru:"Напишите, что нужно"},s1p:{es:"En el chat de la web o por WhatsApp, en ruso, español o inglés.",en:"In the website chat or on WhatsApp, in Russian, Spanish or English.",ru:"В чате на сайте или в WhatsApp, на любом из трёх языков."},
+ s2t:{es:"Te confirmamos al momento",en:"Instant confirmation",ru:"Сразу подтвердим"},s2p:{es:"El asistente mira el stock, te da el total y aparta los productos.",en:"The assistant checks stock, gives you the total and puts items aside.",ru:"Ассистент проверит наличие, назовёт сумму и отложит товар."},
+ s3t:{es:"Recoge en tienda",en:"Collect in store",ru:"Заберите в магазине"},s3p:{es:"Di tu nombre en caja. Pagas allí, con tarjeta o efectivo.",en:"Give your name at the till. Pay there by card or cash.",ru:"Назовите имя на кассе. Оплата картой или наличными."},
+ gT:{es:"Cajas regalo",en:"Gift boxes",ru:"Подарочные наборы"},gP:{es:"Para Año Nuevo, para quien echa de menos casa o para quien nunca ha probado nada de esto.",en:"For New Year, for someone missing home, or for someone who's never tried any of it.",ru:"На Новый год, для тех, кто скучает по дому, или для тех, кто всё это ещё не пробовал."},
+ g1c:{es:"Año Nuevo",en:"New Year",ru:"Новый год"},g1t:{es:"Caja Novy God",en:"Novy God box",ru:"Набор «Новогодний»"},g1p:{es:"Caviar rojo, shprot, chocolates Alionka, mandarinas y champán soviético.",en:"Red caviar, sprats, Alionka chocolate, mandarins and Soviet-style sparkling wine.",ru:"Красная икра, шпроты, «Алёнка», мандарины и «Советское» шампанское."},
+ g2c:{es:"Dulce",en:"Sweet",ru:"Сладкий"},g2t:{es:"Caja Merienda",en:"Tea-time box",ru:"Набор к чаю"},g2p:{es:"Pryaniki, zefir, halva, leche condensada y té negro.",en:"Pryaniki, zefir, halva, condensed milk and black tea.",ru:"Пряники, зефир, халва, сгущёнка и чёрный чай."},
+ g3c:{es:"Armenia",en:"Armenia",ru:"Армения"},g3t:{es:"Caja Ereván",en:"Yerevan box",ru:"Набор «Ереван»"},g3p:{es:"Brandy armenio, lavash, basturma, sujuk y dulce de nuez.",en:"Armenian brandy, lavash, basturma, sujuk and walnut sweets.",ru:"Армянский коньяк, лаваш, бастурма, суджух и сладости."},
+ vCap:{es:"Dónde estamos",en:"Find us",ru:"Где мы"},vT:{es:"En el Raval",en:"In the Raval",ru:"В Равале"},vP:{es:"En el Raval, a dos minutos del Liceu. ",en:"In the Raval, two minutes from the Liceu. ",ru:"В Равале, в двух минутах от театра Лисеу. "},
+ iA:{es:"Dirección",en:"Address",ru:"Адрес"},iM:{es:"Liceu (L3), 2 min",en:"Liceu (L3), 2 min",ru:"Liceu (L3), 2 минуты"},iH:{es:"Horario",en:"Hours",ru:"Часы"},iHv:{es:"Lunes–sábado 10:00–20:30",en:"Monday–Saturday 10:00–20:30",ru:"Пн–сб 10:00–20:30"},iS:{es:"Pago",en:"Payment",ru:"Оплата"},iSv:{es:"Tarjeta, efectivo, Bizum",en:"Card, cash, Bizum",ru:"Карта, наличные, Bizum"},
+ route:{es:"Cómo llegar",en:"Directions",ru:"Маршрут"},foot:{es:"Concepto de Vitrina Studio",en:"Concept by Vitrina Studio",ru:"Концепт Vitrina Studio"},
+ fAll:{es:"Todo",en:"All",ru:"Всё"},fDairy:{es:"Lácteos",en:"Dairy",ru:"Молочное"},fFroz:{es:"Congelados",en:"Frozen",ru:"Заморозка"},fPan:{es:"Despensa",en:"Pantry",ru:"Бакалея"},fSweet:{es:"Dulces",en:"Sweets",ru:"Сладкое"},fDrink:{es:"Bebidas",en:"Drinks",ru:"Напитки"},
+ sIn:{es:"en stock",en:"in stock",ru:"есть"},sLo:{es:"quedan pocos",en:"low stock",ru:"мало"},sFr:{es:"congelado",en:"frozen",ru:"заморозка"}
+};
+const P=[
+ ["fDairy","Tvorog 9%","Творог 9%","RU",3.9,"in","#F7F3EA","#14213D"],["fDairy","Smetana 20%","Сметана 20%","LT",2.6,"in","#FFFFFF","#14213D"],["fDairy","Kéfir","Кефир","LT",2.4,"lo","#E3EAF8","#14213D"],
+ ["fFroz","Pelmeni siberianos 1 kg","Пельмени сибирские 1 кг","RU",8.9,"fr","#F2B33D","#14213D"],["fFroz","Vareniki de cereza","Вареники с вишней","UA",6.5,"fr","#D33A2C","#fff"],
+ ["fPan","Grechka 900 g","Гречка 900 г","RU",3.2,"in","#8B5E34","#fff"],["fPan","Shprot en aceite","Шпроты в масле","LV",3.6,"in","#1E3A8A","#fff"],["fPan","Lavash armenio","Армянский лаваш","AM",2.2,"in","#E9D8B4","#14213D"],
+ ["fSweet","Sgushchenka","Сгущёнка","BY",2.8,"in","#2F6B4F","#fff"],["fSweet","Chocolate Alionka","Шоколад «Алёнка»","RU",2.9,"lo","#D33A2C","#fff"],["fSweet","Pryaniki de Tula","Тульский пряник","RU",3.5,"in","#8B5E34","#fff"],
+ ["fDrink","Kvas 1,5 l","Квас 1,5 л","LT",2.5,"in","#5A3A1A","#fff"],["fDrink","Borjomi","Боржоми","GE",1.95,"in","#2F6B4F","#fff"],["fDrink","Brandy Ararat 5*","Коньяк «Арарат»","AM",24,"lo","#14213D","#F2B33D"]
+];
+let f="fAll";
+function render(){const l=document.documentElement.lang;
+  const fb=document.getElementById("filters");fb.textContent="";["fAll","fDairy","fFroz","fPan","fSweet","fDrink"].forEach(k=>{const b=document.createElement("button");b.type="button";b.textContent=T[k][l];b.setAttribute("aria-pressed",k===f);b.onclick=()=>{f=k;render();};fb.append(b);});
+  const g=document.getElementById("grid");g.textContent="";P.filter(p=>f==="fAll"||p[0]===f).forEach(([c,es,ru,o,pr,s,bg,fg])=>{
+    const a=document.createElement("article");a.className="item";
+    a.innerHTML='<div class="sw"></div><span class="o"></span><h3></h3><div class="bt"><span class="pr"></span><span class="st"></span></div>';
+    const sw=a.querySelector(".sw");const ph={"Творог 9%":"tvorog","Гречка 900 г":"buckwheat","Сгущёнка":"condensed","Тульский пряник":"pryaniki","Квас 1,5 л":"kvass","Пельмени сибирские 1 кг":"pelmeni"}[ru];
+    sw.style.background=ph?"url(photos/"+ph+".jpg)":bg;sw.style.color=fg;sw.textContent=ru.toUpperCase();if(ph){sw.classList.add("ph");sw.setAttribute("role","img");sw.setAttribute("aria-label",ru);}else if(bg==="#FFFFFF")sw.style.border="1.5px solid #E1DED4";
+    a.querySelector(".o").textContent=o+" · "+T[c][l];a.querySelector("h3").textContent=l==="ru"?ru:es;a.querySelector(".pr").textContent=pr.toFixed(2).replace(".",",")+" €";
+    const st=a.querySelector(".st");st.className="st "+(s==="in"?"in":s==="lo"?"lo":"fr");st.textContent=T[s==="in"?"sIn":s==="lo"?"sLo":"sFr"][l];g.append(a);});
+  document.getElementById("strip").textContent=("ТВОРОГ · KEFIR · ПЕЛЬМЕНИ · GRECHKA · СГУЩЁНКА · KVAS · ЛАВАШ · BORJOMI · ПРЯНИКИ · ").repeat(6);
+}
+new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+</script>
+<script src="../shared/i18n.js"></script>
+<script src="../shared/slots.js"></script>
+<script src="assistant-config.js"></script>
+<script src="../shared/assistant.js"></script>
+<script src="photos/credits.js"></script>
+<script src="../shared/credits.js"></script>
+<script>render();</script>
+<script src="../shared/motion.js" data-accent="#F2B33D" data-bg="#14213D" data-fg="#FFF8EC" data-name="Polka" data-photos="buckwheat.jpg,condensed.jpg,kvass.jpg,pelmeni.jpg,pryaniki.jpg,shelf.jpg,tvorog.jpg"></script>
+</body>
+</html>
