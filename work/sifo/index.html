@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta name="robots" content="noindex">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Sifó Vermutería</title>
@@ -75,6 +74,11 @@ img{display:block;max-width:100%}
 .status.open i{background:#2BB673;box-shadow:0 0 0 0 #2BB67399;animation:ping 2s infinite}
 @keyframes ping{70%{box-shadow:0 0 0 8px #2BB67300}100%{box-shadow:0 0 0 0 #2BB67300}}
 @media (max-width:720px){.nav{display:none}.status{margin-left:auto}}
+.lng{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:2px;margin-left:10px}
+.lng button{all:unset;cursor:pointer;padding:5px 9px;border-radius:999px;font-size:11px;letter-spacing:.08em}
+.lng button[aria-pressed="true"]{background:var(--ink,#1A1411);color:var(--paper,#EFE6D4)}
+.lng button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+@media (max-width:420px){.status .more{display:none}}
 @media (max-width:520px){.status .more{display:none}}
 
 /* ---------- hero ---------- */
@@ -273,6 +277,7 @@ footer .wrap{padding-block:clamp(40px,6vw,80px) 96px}
       <a href="#reserva">Reservar</a>
     </nav>
     <span class="status mono" id="status"><i></i><span id="statusTxt">Gràcia · BCN</span></span>
+    <span class="lng mono" role="group" aria-label="Idioma"><button type="button" data-lang="es">ES</button><button type="button" data-lang="ca">CA</button></span>
   </div>
 </header>
 
@@ -457,10 +462,27 @@ footer .wrap{padding-block:clamp(40px,6vw,80px) 96px}
 
 <script>
 (() => {
+  /* ES / CA: the page is written in Spanish; in Catalan every text is swapped from CA_TXT and the dynamic lines use tx(). */
+  let LANG = 'es';
+  try { const q = (location.search.match(/[?&]lang=(ca|es)/) || [])[1]; const s = q || localStorage.getItem('sifo-lang'); if (s === 'ca' || s === 'es') LANG = s; else if ((navigator.language || '').slice(0, 2) === 'ca') LANG = 'ca'; } catch (e) {}
+  const tx = (es, ca) => LANG === 'ca' ? ca : es;
+  const CA_TXT = {"Horario": "Horari", "Cerrado": "Tancat", "Vermutería de barrio": "Vermuteria de barri", "Vermut de grifo, sifón en la mesa y latas abiertas al momento.": "Vermut de grifó, sifó a taula i llaunes obertes al moment.", "Los domingos abrimos a las 11:30.": "Els diumenges obrim a les 11:30.", "Reservar mesa": "Reservar taula", "Ver la carta": "Veure la carta", "VERMUT DE GRIFO · CADA DIA · DE REUS ·": "VERMUT DE GRIFÓ · CADA DIA · DE REUS ·", "Vermut de grifo": "Vermut de grifó", "Berberechos": "Escopinyes", "En Gràcia el vermut tiene hora:": "A Gràcia el vermut té hora:", "la una del domingo.": "la una del diumenge.", "Sifón en la mesa, una gilda": "Sifó a taula, una gilda", ", aceitunas": ", olives", "y medio barrio": "i mig barri", "en la acera.": "a la vorera.", "De grifo": "De grifó", "Vermut de Reus, sin botella": "Vermut de Reus, sense ampolla", "Llega en barrica de 30 litros desde Reus, la capital del vermut. Lo servimos frío, con hielo, piel de naranja y una oliva.": "Arriba en bóta de 30 litres des de Reus, la capital del vermut. El servim fred, amb gel, pell de taronja i una oliva.", "El sifón": "El sifó", "Va gratis. Siempre.": "És gratis. Sempre.", "Cada mesa tiene su sifón de vidrio. El chorrito lo pones tú, como en casa de los abuelos.": "Cada taula té el seu sifó de vidre. El raig te'l poses tu, com a casa dels avis.", "Las latas": "Les llaunes", "Abiertas delante de ti": "Obertes davant teu", "Berberechos, mejillones y navajas de conserveras gallegas, con patatas chips y nuestra salsa de vermut.": "Escopinyes, musclos i navalles de conserveres gallegues, amb patates xips i la nostra salsa de vermut.", "Precios con IVA. La carta cambia con lo que llega de la lonja y de las conserveras.": "Preus amb IVA. La carta canvia amb el que arriba de la llotja i de les conserveres.", "copa": "copa", "Negre de la casa, de grifo": "Negre de la casa, de grifó", "Reus · hielo, naranja y oliva": "Reus · gel, taronja i oliva", "Seco, con piel de limón": "Sec, amb pell de llimona", "El de las tardes de verano": "El de les tardes d'estiu", "Vermut negre, bitter y ginebra de Barcelona": "Vermut negre, bitter i ginebra de Barcelona", "Porró de vermut, para la mesa": "Porró de vermut, per a la taula", "1 litro · a partir de 4 personas": "1 litre · a partir de 4 persones", "lata": "llauna", "Berberechos al natural": "Escopinyes al natural", "Con salsa de vermut y pimienta": "Amb salsa de vermut i pebre", "Mejillones en escabeche": "Musclos en escabetx", "Tamaño 8/12, de la ría de Arousa": "Mida 8/12, de la ria d'Arousa", "Navajas al natural": "Navalles al natural", "Limón y aceite": "Llimona i oli", "Ventresca de bonito": "Ventresca de bonítol", "Con piparras y cebolla tierna": "Amb piparres i ceba tendra", "Sardinillas en aceite": "Sardinetes en oli", "Pan con tomate aparte": "Pa amb tomàquet a part", "plato": "plat", "Anchoa, piparra y aceituna": "Anxova, piparra i oliva", "Aliñadas con hinojo y naranja": "Amanides amb fonoll i taronja", "Patatas con salsa Sifó": "Patates amb salsa Sifó", "La salsa la hacemos con vermut negre": "La salsa la fem amb vermut negre", "Picante, como debe ser": "Picant, com ha de ser", "Embutido de Vic": "Embotit de Vic", "Fuet, llonganissa y pan con tomate": "Fuet, llonganissa i pa amb tomàquet", "Hora del vermut": "Hora del vermut", "Domingo de 12:00 a 14:00: vermut + gilda por 5 €.": "Diumenge de 12:00 a 14:00: vermut + gilda per 5 €.", "Un bar pequeño · 34 personas": "Un bar petit · 34 persones", "Los sifones": "Els sifons", "De vidrio verde, como los de antes. Los rellenamos cada mañana.": "De vidre verd, com els d'abans. Els omplim cada matí.", "Banderillas": "Banderilles", "Encurtidos de la casa: zanahoria, cebollita, pepinillo y piparra.": "Encurtits de la casa: pastanaga, cebeta, cogombret i piparra.", "En la pared": "A la paret", "Un anuncio de vermut de 1925. El Penedès ya lo hacía hace un siglo.": "Un anunci de vermut de 1925. El Penedès ja el feia fa un segle.", "Tres ingredientes, un palillo.": "Tres ingredients, un escuradents.", "“Pides un vermut, te traen el sifón, y de repente son las cuatro.”": "“Demanes un vermut, et porten el sifó, i de cop són les quatre.”", "Lo que dice todo el mundo": "El que diu tothom", "Metro L3 Fontana · 4 min a pie": "Metro L3 Fontana · a 4 min a peu", "Sin reserva en barra, con reserva en mesa": "Sense reserva a la barra, amb reserva a taula", "Abierto": "Obert", "Ahora": "Ara", "Reserva en 20 segundos. Te confirmamos por WhatsApp. Para grupos de más de 8, escríbenos y montamos la mesa larga.": "Reserva en 20 segons. Et confirmem per WhatsApp. Per a grups de més de 8, escriu-nos i muntem la taula llarga.", "Tu nombre": "El teu nom", "Personas": "Persones", "Día": "Dia", "Hora": "Hora", "Preparar reserva": "Preparar la reserva", "Mensaje listo para WhatsApp": "Missatge llest per a WhatsApp", "Demo: en la web real este botón abre WhatsApp del bar con el mensaje ya escrito.": "Demo: a la web real aquest botó obre el WhatsApp del bar amb el missatge ja escrit.", "Sifó Vermutería": "Sifó Vermuteria", "Mar–Dom": "Dt–Dg", "Secciones": "Seccions", "Sobre esta web": "Sobre aquesta web", "Sifó es un bar ficticio. Esta página es un concepto de diseño de Vitrina Studio.": "Sifó és un bar fictici. Aquesta pàgina és un concepte de disseny de Vitrina Studio.", "Fotos · Wikimedia Commons": "Fotos · Wikimedia Commons", "Concepto · Vitrina Studio": "Concepte · Vitrina Studio"};
+  const CA_ATTR = {"Vermut de grifo, 3,20 euros": "Vermut de grifó, 3,20 euros", "Gildas de anchoa y guindilla": "Gildes d'anxova i bitxo", "Cuenco de aceitunas aliñadas": "Bol d'olives amanides", "Calle estrecha de Gràcia": "Carrer estret de Gràcia", "Dos sifones de vidrio verde en una bandeja de madera": "Dos sifons de vidre verd en una safata de fusta", "Encurtidos variados en un cuenco blanco": "Encurtits variats en un bol blanc", "Anuncio de vermut catalán de 1925": "Anunci de vermut català de 1925", "Gildas en un plato": "Gildes en un plat", "Horario semanal": "Horari setmanal", "Secciones": "Seccions", "Una persona menos": "Una persona menys", "Una persona más": "Una persona més"};
+  document.documentElement.lang = LANG;
+  if (LANG === 'ca') {
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let n; while ((n = w.nextNode())) { const k = n.nodeValue.trim().replace(/\s+/g, ' '); if (CA_TXT[k] !== undefined) n.nodeValue = n.nodeValue.replace(n.nodeValue.trim(), CA_TXT[k]); }
+    document.querySelectorAll('[aria-label],[alt]').forEach(e => ['aria-label', 'alt'].forEach(a => { const v = e.getAttribute(a); if (v && CA_ATTR[v.trim()]) e.setAttribute(a, CA_ATTR[v.trim()]); }));
+    document.title = document.title.replace('Vermutería', 'Vermuteria');
+  }
+  document.querySelectorAll('.lng button').forEach(b => {
+    b.setAttribute('aria-pressed', String(b.dataset.lang === LANG));
+    b.addEventListener('click', () => { if (b.dataset.lang === LANG) return; try { localStorage.setItem('sifo-lang', b.dataset.lang); } catch (e) {} location.reload(); });
+  });
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]shot/.test(location.search);
 
   // ticker
-  const words = ['Vermut de grifo','Sifó a la taula','Gildes','Berberechos','Olives de la casa','Patates amb salsa','Porró per compartir','Diumenge a la una'];
+  const words = [tx('Vermut de grifo','Vermut de grifó'),'Sifó a la taula','Gildes',tx('Berberechos','Escopinyes'),'Olives de la casa','Patates amb salsa','Porró per compartir','Diumenge a la una'];
   const track = document.getElementById('track');
   const row = words.map(w => `<span>${w}</span>`).join('');
   track.innerHTML = row + row;
@@ -489,7 +511,7 @@ footer .wrap{padding-block:clamp(40px,6vw,80px) 96px}
   };
   const order = [1, 2, 3, 4, 5, 6, 0];
   const names = {1:'Dl',2:'Dt',3:'Dc',4:'Dj',5:'Dv',6:'Ds',0:'Dg'};
-  const longNames = {1:'lunes',2:'martes',3:'miércoles',4:'jueves',5:'viernes',6:'sábado',0:'domingo'};
+  const longNames = LANG === 'ca' ? {1:'dilluns',2:'dimarts',3:'dimecres',4:'dijous',5:'divendres',6:'dissabte',0:'diumenge'} : {1:'lunes',2:'martes',3:'miércoles',4:'jueves',5:'viernes',6:'sábado',0:'domingo'};
   const START = 10, END = 26, SPAN = END - START;
   const fmt = h => { const hh = Math.floor(h) % 24, mm = Math.round((h % 1) * 60); return String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0'); };
   const pct = h => ((h - START) / SPAN * 100) + '%';
@@ -512,11 +534,11 @@ footer .wrap{padding-block:clamp(40px,6vw,80px) 96px}
     html += '</div><span class="sp"></span></div>';
     for (const d of order) {
       const segs = H[d];
-      const label = segs.length ? segs.map(s => fmt(s[0]) + '–' + fmt(s[1])).join(' · ') : 'Cerrado';
+      const label = segs.length ? segs.map(s => fmt(s[0]) + '–' + fmt(s[1])).join(' · ') : tx('Cerrado','Tancat');
       html += `<div class="day${d === now.day ? ' today' : ''}" role="row"><span class="n" role="cell">${names[d]}</span><div class="bar" role="cell" aria-label="${longNames[d]}: ${label}">`;
       for (const s of segs) html += `<span class="seg${s[2] ? ' vermut' : ''}" style="left:${pct(s[0])};width:${(s[1]-s[0])/SPAN*100}%"></span>`;
       if (d === now.day && now.h >= START && now.h <= END) html += `<span class="nowline" style="left:${pct(now.h)}"></span>`;
-      html += `</div><span class="t" role="cell">${segs.length ? segs.map(s => fmt(s[0]) + '–' + fmt(s[1])).join('<br>') : 'cerrado'}</span></div>`;
+      html += `</div><span class="t" role="cell">${segs.length ? segs.map(s => fmt(s[0]) + '–' + fmt(s[1])).join('<br>') : tx('cerrado','tancat')}</span></div>`;
     }
     sched.innerHTML = html;
 
@@ -526,8 +548,8 @@ footer .wrap{padding-block:clamp(40px,6vw,80px) 96px}
     let line;
     if (open) {
       st.classList.add('open');
-      stTxt.innerHTML = 'Abierto<span class="more"> · hasta las ' + fmt(open[1]) + '</span>';
-      line = `Abierto ahora. Cerramos a las ${fmt(open[1])}.`;
+      stTxt.innerHTML = tx('Abierto','Obert') + '<span class="more"> · ' + tx('hasta las ','fins a les ') + fmt(open[1]) + '</span>';
+      line = tx(`Abierto ahora. Cerramos a las ${fmt(open[1])}.`, `Obert ara. Tanquem a les ${fmt(open[1])}.`);
     } else {
       st.classList.remove('open');
       // find next opening
@@ -537,11 +559,11 @@ footer .wrap{padding-block:clamp(40px,6vw,80px) 96px}
         const s = H[d].find(s => k > 0 || s[0] > now.h);
         if (s) next = { d, s, k };
       }
-      const when = next.k === 0 ? 'hoy' : next.k === 1 ? 'mañana' : 'el ' + longNames[next.d];
-      stTxt.innerHTML = 'Cerrado<span class="more"> · abrimos ' + (next.k === 0 ? 'a las ' : when + ' ') + fmt(next.s[0]) + '</span>';
-      line = `Ahora cerrado. Abrimos ${when} a las ${fmt(next.s[0])}.`;
+      const when = next.k === 0 ? tx('hoy','avui') : next.k === 1 ? tx('mañana','demà') : (LANG === 'ca' ? 'el ' : 'el ') + longNames[next.d];
+      stTxt.innerHTML = tx('Cerrado','Tancat') + '<span class="more"> · ' + tx('abrimos ','obrim ') + (next.k === 0 ? tx('a las ','a les ') : when + ' ') + fmt(next.s[0]) + '</span>';
+      line = tx(`Ahora cerrado. Abrimos ${when} a las ${fmt(next.s[0])}.`, `Ara tancat. Obrim ${when} a les ${fmt(next.s[0])}.`);
     }
-    nowTxt.innerHTML = `<span class="mono">${now.clock} en Barcelona</span>${line}`;
+    nowTxt.innerHTML = `<span class="mono">${now.clock} ${tx('en','a')} Barcelona</span>${line}`;
   }
   drawSched();
   setInterval(drawSched, 60000);
@@ -554,7 +576,7 @@ footer .wrap{padding-block:clamp(40px,6vw,80px) 96px}
     const d = new Date(); d.setDate(d.getDate() + k);
     const wd = d.getDay();
     if (!H[wd].length) continue;
-    const lab = k === 0 ? 'Hoy' : k === 1 ? 'Mañana' : d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+    const lab = k === 0 ? tx('Hoy','Avui') : k === 1 ? tx('Mañana','Demà') : d.toLocaleDateString(tx('es-ES','ca-ES'), { weekday: 'long', day: 'numeric', month: 'long' });
     opts.push(`<option value="${wd}|${lab}">${lab.charAt(0).toUpperCase() + lab.slice(1)}</option>`);
   }
   daySel.innerHTML = opts.join('');
@@ -564,7 +586,7 @@ footer .wrap{padding-block:clamp(40px,6vw,80px) 96px}
     const list = [];
     for (const s of H[+wd]) for (let t = s[0]; t <= s[1] - 1.5; t += 0.5) list.push(t);
     chosen = null;
-    slots.innerHTML = list.length ? list.map(t => `<button type="button" aria-pressed="false" data-t="${t}">${fmt(t)}</button>`).join('') : '<span class="empty">Sin horas libres</span>';
+    slots.innerHTML = list.length ? list.map(t => `<button type="button" aria-pressed="false" data-t="${t}">${fmt(t)}</button>`).join('') : '<span class="empty">' + tx('Sin horas libres','No hi ha hores lliures') + '</span>';
   }
   slots.addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
@@ -582,12 +604,12 @@ footer .wrap{padding-block:clamp(40px,6vw,80px) 96px}
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
     const err = document.getElementById('err');
-    if (!name) { err.textContent = 'Escribe tu nombre para la reserva.'; document.getElementById('name').focus(); return; }
-    if (chosen === null) { err.textContent = 'Elige una hora.'; return; }
+    if (!name) { err.textContent = tx('Escribe tu nombre para la reserva.','Escriu el teu nom per a la reserva.'); document.getElementById('name').focus(); return; }
+    if (chosen === null) { err.textContent = tx('Elige una hora.','Tria una hora.'); return; }
     err.textContent = '';
     const dayLab = daySel.value.split('|')[1];
     document.getElementById('msg').textContent =
-      `Hola Sifó! Soy ${name}.\nQuería reservar mesa para ${n} ${n === 1 ? 'persona' : 'personas'}\n${dayLab.toLowerCase()} a las ${fmt(chosen)}.\nGràcies!`;
+      tx(`Hola Sifó! Soy ${name}.\nQuería reservar mesa para ${n} ${n === 1 ? 'persona' : 'personas'}\n${dayLab.toLowerCase()} a las ${fmt(chosen)}.\nGràcies!`, `Hola Sifó! Soc ${name}.\nVoldria reservar taula per a ${n} ${n === 1 ? 'persona' : 'persones'}\n${dayLab.toLowerCase()} a les ${fmt(chosen)}.\nGràcies!`);
     const t = document.getElementById('ticket'); t.hidden = false;
     t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
   });

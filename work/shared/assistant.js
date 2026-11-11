@@ -8,18 +8,18 @@
    capability). Everywhere else the demos play as recorded conversations. */
 (function(){
   const A=window.ASSISTANT; if(!A) return;
-  const LANGS=["es","en","ru"];
+  const LANGS=["es","en","ru","ca"];
   const UI={
-    open:{es:"Escríbenos",en:"Message us",ru:"Написать нам"},
-    online:{es:"responde al instante",en:"replies instantly",ru:"отвечает сразу"},
-    typing:{es:"escribiendo…",en:"typing…",ru:"печатает…"},
-    ph:{es:"Escribe un mensaje",en:"Type a message",ru:"Напишите сообщение"},
-    phRec:{es:"Toca una pregunta para ver la demo",en:"Tap a question to play the demo",ru:"Нажмите вопрос, чтобы запустить демо"},
-    rec:{es:"Demo grabada",en:"Recorded demo",ru:"Записанное демо"},
-    live:{es:"IA en vivo",en:"Live AI",ru:"Живой ИИ"},
-    err:{es:"No he podido responder. Prueba otra vez.",en:"I couldn't reply that time. Try again.",ru:"Не получилось ответить. Попробуйте ещё раз."},
-    close:{es:"Cerrar",en:"Close",ru:"Закрыть"},
-    reset:{es:"Nuevo chat",en:"New chat",ru:"Новый чат"}
+    open:{es:"Escríbenos",en:"Message us",ru:"Написать нам",ca:"Escriu-nos"},
+    online:{es:"responde al instante",en:"replies instantly",ru:"отвечает сразу",ca:"respon a l'instant"},
+    typing:{es:"escribiendo…",en:"typing…",ru:"печатает…",ca:"escrivint…"},
+    ph:{es:"Escribe un mensaje",en:"Type a message",ru:"Напишите сообщение",ca:"Escriu un missatge"},
+    phRec:{es:"Toca una pregunta para ver la demo",en:"Tap a question to play the demo",ru:"Нажмите вопрос, чтобы запустить демо",ca:"Toca una pregunta per veure la demo"},
+    rec:{es:"Demo grabada",en:"Recorded demo",ru:"Записанное демо",ca:"Demo gravada"},
+    live:{es:"IA en vivo",en:"Live AI",ru:"Живой ИИ",ca:"IA en directe"},
+    err:{es:"No he podido responder. Prueba otra vez.",en:"I couldn't reply that time. Try again.",ru:"Не получилось ответить. Попробуйте ещё раз.",ca:"No he pogut respondre. Torna-ho a provar."},
+    close:{es:"Cerrar",en:"Close",ru:"Закрыть",ca:"Tancar"},
+    reset:{es:"Nuevo chat",en:"New chat",ru:"Новый чат",ca:"Xat nou"}
   };
   const th=A.theme;
   const css=`

@@ -4,15 +4,13 @@
   const S=Slots;
   const H={0:[[780,990]],1:[],2:[[780,960],[1200,1410]],3:[[780,960],[1200,1410]],4:[[780,960],[1200,1410]],5:[[780,960],[1200,1410]],6:[[780,960],[1200,1410]]};
   const cal=S.make(H,{lastStart:60,busy:(date,min,d)=>(d.getDay()===5||d.getDay()===6)&&(min===1260||min===1290)||S.hash(date+min)%7===0});
-  const L={es:0,en:1,ru:2};
+  const L={es:0,en:1,ru:2,ca:3};
   const tr=(l,a)=>a[L[l]];
   window.ASSISTANT={
     name:"Lazur",initials:"Л",
-    role:{es:"reservas",en:"reservations",ru:"бронирование"},
+    role:{es:"reservas",en:"reservations",ru:"бронирование",ca:"reserves"},
     theme:{bg:"#1F3A8A",fg:"#FFFFFF",accent:"#B88A3E",onAccent:"#FFFFFF",bubble:"#FFFFFF",me:"#DCE3F7",chat:"#EEF1F8"},
-    greet:{es:"¡Hola! Soy el asistente de Lazur. Te reservo mesa, te explico cualquier plato de la carta o te preparo una celebración. ¿Qué necesitas?",
-           en:"Hello! I'm Lazur's assistant. I can book you a table, explain any dish on the menu or plan a celebration. What do you need?",
-           ru:"Здравствуйте! Я ассистент ресторана «Лазурь». Забронирую стол, расскажу про любое блюдо или помогу с банкетом. Чем помочь?"},
+    greet:{es:"¡Hola! Soy el asistente de Lazur. Te reservo mesa, te explico cualquier plato de la carta o te preparo una celebración. ¿Qué necesitas?",en:"Hello! I'm Lazur's assistant. I can book you a table, explain any dish on the menu or plan a celebration. What do you need?",ru:"Здравствуйте! Я ассистент ресторана «Лазурь». Забронирую стол, расскажу про любое блюдо или помогу с банкетом. Чем помочь?",ca:"Hola! Soc l'assistent de Lazur. Et reservo taula, t'explico qualsevol plat de la carta o et preparo una celebració. Què necessites?"},
     tools:[
       {name:"check_table",description:"Check if a table is free. Call before offering or confirming any time.",
        inputSchema:{type:"object",properties:{date:{type:"string",description:"YYYY-MM-DD"},time:{type:"string",description:"HH:MM"},people:{type:"integer"}},required:["date","time","people"]},
@@ -23,11 +21,11 @@
        inputSchema:{type:"object",properties:{name:{type:"string"},date:{type:"string"},time:{type:"string"},people:{type:"integer"},notes:{type:"string"}},required:["name","date","time","people"]},
        async execute(a,ui){const m=S.toMin(a.time),st=cal.status(a.date,m);if(st!=="free")return {ok:false,status:st,alternatives_same_day:cal.alternatives(a.date,m)};
          cal.take(a.date,m);const ref=S.ref("EK"),d=S.dateOf(a.date);
-         ui.card(tr(ui.lang(),["Mesa reservada","Table booked","Стол забронирован"])+" · "+ref,S.nice(d,ui.lang())+" · "+S.fmt(m)+" · "+a.people+" · "+a.name);
+         ui.card(tr(ui.lang(),["Mesa reservada","Table booked","Стол забронирован","Taula reservada"])+" · "+ref,S.nice(d,ui.lang())+" · "+S.fmt(m)+" · "+a.people+" · "+a.name);
          return {ok:true,ref,reminder:"WhatsApp reminder at 12:00 on the day"};}},
       {name:"event_request",description:"Pass a group (over 12), whole-venue hire or New Year's Eve request to the manager. Needs name, date, headcount.",
        inputSchema:{type:"object",properties:{name:{type:"string"},date:{type:"string"},people:{type:"integer"},occasion:{type:"string"},budget:{type:"string"}},required:["name","people"]},
-       async execute(a,ui){ui.card(tr(ui.lang(),["Solicitud de grupo","Group request","Заявка на банкет"]),a.name+" · "+a.people+" · "+(a.occasion||"")+(a.date?" · "+a.date:""));
+       async execute(a,ui){ui.card(tr(ui.lang(),["Solicitud de grupo","Group request","Заявка на банкет","Sol·licitud de grup"]),a.name+" · "+a.people+" · "+(a.occasion||"")+(a.date?" · "+a.date:""));
          return {ok:true,follow_up:"The manager replies within 24 hours with a set menu and price"};}}
     ],
     brief:()=>`You are the reservations assistant of Lazur, a homemade Russian restaurant at Sant Antoni, Barcelona. Open since 2016, 44 seats, average guest score 9.2.
@@ -38,29 +36,29 @@ ${S.calendar()}
 Hours: Tue–Sat 13:00–16:00 and 20:00–23:30 (last booking 22:30), Sun 13:00–16:30, Mon closed.
 Menu: Olivier salad €8.50, shuba (herring under beetroot) €9, blini with red caviar €14, house pickles €7, borsch €8, solyanka €9, pelmeni €13, beef stroganoff €17, Russian patty with mash €14, potato vareniki €12 (vegetarian), medovik €6.50, syrniki €7. Local wines, Russian beers, vodkas, house liqueurs. Group set menus from €32 per person.`,
     demos:[
-      {label:{es:"Mesa para 2 el viernes a las 21:00",en:"Table for 2 on Friday at 9pm",ru:"Стол на двоих в пятницу в 21:00"},
+      {label:{es:"Mesa para 2 el viernes a las 21:00",en:"Table for 2 on Friday at 9pm",ru:"Стол на двоих в пятницу в 21:00",ca:"Taula per a 2 divendres a les 21:00"},
        steps:l=>{const d=S.nextDay(5),date=S.iso(d),m=cal.nearestFree(date,1260),t=S.fmt(m),day=S.weekday(d,l);let ref="";
-        return [{u:tr(l,["Hola, ¿tenéis mesa para 2 el viernes a las 21:00?","Hi, do you have a table for 2 on Friday at 9pm?","Здравствуйте, есть стол на двоих в пятницу в 21:00?"])},
+        return [{u:tr(l,["Hola, ¿tenéis mesa para 2 el viernes a las 21:00?","Hi, do you have a table for 2 on Friday at 9pm?","Здравствуйте, есть стол на двоих в пятницу в 21:00?","Hola, teniu taula per a 2 divendres a les 21:00?"])},
           {tool:"check_table",args:{date,time:"21:00",people:2}},
-          {b:()=>m===1260?tr(l,[`¡Sí! El ${day} a las 21:00 tenemos mesa para 2. ¿A qué nombre?`,`Yes! We have a table for 2 on ${day} at 21:00. What name shall I use?`,`Да, в ${day} в 21:00 есть стол на двоих. На какое имя?`])
-                          :tr(l,[`El ${day} a las 21:00 está completo, pero tengo mesa para 2 a las ${t}. ¿Te va bien? Dime tu nombre.`,`We're full at 21:00 on ${day}, but I have a table for 2 at ${t}. Does that work? Just tell me your name.`,`В ${day} на 21:00 мест нет, но есть стол на двоих в ${t}. Подойдёт? Напишите имя.`])},
-          {u:tr(l,["Perfecto, a nombre de Jordi","Perfect, it's under Claire","Отлично, на имя Ольга"])},
-          {tool:"book_table",args:{name:tr(l,["Jordi","Claire","Ольга"]),date,time:t,people:2},after:r=>ref=r.ref},
-          {b:()=>tr(l,[`Hecho, Jordi: mesa para 2 el ${day} a las ${t}, referencia ${ref}. Te mandaremos un recordatorio ese día. ¡Hasta el viernes!`,`Done, Claire: table for 2 on ${day} at ${t}, reference ${ref}. We'll send a reminder on the day. See you Friday!`,`Готово, Ольга: стол на двоих в ${day} в ${t}, номер брони ${ref}. В этот день пришлём напоминание. До пятницы!`])}];}},
-      {label:{es:"¿Qué es la shuba?",en:"What is shuba?",ru:"Что посоветуете впервые?"},
-       steps:l=>[{u:tr(l,["¿Qué es la shuba? Nunca he probado comida rusa","What is shuba? I've never had Russian food","Что посоветуете тому, кто впервые пробует русскую кухню?"])},
+          {b:()=>m===1260?tr(l,[`¡Sí! El ${day} a las 21:00 tenemos mesa para 2. ¿A qué nombre?`,`Yes! We have a table for 2 on ${day} at 21:00. What name shall I use?`,`Да, в ${day} в 21:00 есть стол на двоих. На какое имя?`,`Sí! El ${day} a les 21:00 tenim taula per a 2. A quin nom?`])
+                          :tr(l,[`El ${day} a las 21:00 está completo, pero tengo mesa para 2 a las ${t}. ¿Te va bien? Dime tu nombre.`,`We're full at 21:00 on ${day}, but I have a table for 2 at ${t}. Does that work? Just tell me your name.`,`В ${day} на 21:00 мест нет, но есть стол на двоих в ${t}. Подойдёт? Напишите имя.`,`El ${day} a les 21:00 és ple, però tinc taula per a 2 a les ${t}. Et va bé? Digues-me el teu nom.`])},
+          {u:tr(l,["Perfecto, a nombre de Jordi","Perfect, it's under Claire","Отлично, на имя Ольга","Perfecte, a nom de Jordi"])},
+          {tool:"book_table",args:{name:tr(l,["Jordi","Claire","Ольга","Jordi"]),date,time:t,people:2},after:r=>ref=r.ref},
+          {b:()=>tr(l,[`Hecho, Jordi: mesa para 2 el ${day} a las ${t}, referencia ${ref}. Te mandaremos un recordatorio ese día. ¡Hasta el viernes!`,`Done, Claire: table for 2 on ${day} at ${t}, reference ${ref}. We'll send a reminder on the day. See you Friday!`,`Готово, Ольга: стол на двоих в ${day} в ${t}, номер брони ${ref}. В этот день пришлём напоминание. До пятницы!`,`Fet, Jordi: taula per a 2 el ${day} a les ${t}, referència ${ref}. T'enviarem un recordatori aquell dia. Fins divendres!`])}];}},
+      {label:{es:"¿Qué es la shuba?",en:"What is shuba?",ru:"Что посоветуете впервые?",ca:"Què és la shuba?"},
+       steps:l=>[{u:tr(l,["¿Qué es la shuba? Nunca he probado comida rusa","What is shuba? I've never had Russian food","Что посоветуете тому, кто впервые пробует русскую кухню?","Què és la shuba? No he tastat mai menjar rus"])},
          {b:tr(l,["Es arenque bajo capas de patata, zanahoria y remolacha: como una ensaladilla rusa en tarta, dulce y salada a la vez. Para empezar te recomiendo pelmeni (13 €), que son como raviolis de carne, y medovik de postre 🍯",
                   "It's herring under layers of potato, carrot and beetroot: think of a layered potato salad, sweet and salty at once. For a first visit I'd go for pelmeni (€13), little meat dumplings like ravioli, and medovik honey cake for dessert 🍯",
-                  "Для первого раза — пельмени ручной лепки (13 €) и бефстроганов с пюре (17 €). На закуску шуба, а на десерт медовик 🍯"])}]},
-      {label:{es:"Somos 18 para un cumpleaños",en:"We're 18 for a birthday",ru:"Нас 18 на день рождения"},
-       steps:l=>[{u:tr(l,["Somos 18 personas para un cumpleaños, ¿se puede?","We're 18 people for a birthday, is that possible?","Нас 18 человек на день рождения, можно?"])},
-         {b:tr(l,["¡Claro! Para 18 montamos mesa larga con zakuski para compartir y principal a elegir, desde 32 € por persona. ¿Tu nombre y la fecha?","Of course! For 18 we set a long table with zakuski to share and a choice of main, from €32 per person. Can I have your name and the date?","Конечно! Для 18 гостей накроем длинный стол: закуски, горячее на выбор, от 32 € с человека. Как вас зовут и на какую дату?"])},
-         {u:tr(l,["Marta, el sábado 13 de diciembre","Tom, Saturday 13 December","Ирина, суббота 13 декабря"])},
-         {tool:"event_request",args:{name:tr(l,["Marta","Tom","Ирина"]),people:18,occasion:tr(l,["cumpleaños","birthday","день рождения"]),date:"13/12"}},
-         {b:tr(l,["Apuntado, Marta. El encargado te escribe en menos de 24 h con el menú y el precio final 🎉","Got it, Tom. Our manager will message you within 24 hours with the menu and final price 🎉","Записала, Ирина. Менеджер напишет в течение 24 часов с меню и итоговой ценой 🎉"])}]},
-      {label:{es:"¿Tenéis platos vegetarianos?",en:"Any vegetarian dishes?",ru:"Есть вегетарианское?"},
-       steps:l=>[{u:tr(l,["¿Tenéis platos vegetarianos?","Do you have vegetarian dishes?","Есть вегетарианские блюда?"])},
-         {b:tr(l,["Sí: vareniki de patata con cebolla frita (12 €), encurtidos de la casa, blinis y de postre syrniki o medovik. Avísanos al reservar y lo preparamos con cariño.","Yes: potato vareniki with fried onion (€12), house pickles, blini, and syrniki or medovik for dessert. Mention it when you book and we'll look after you.","Да: вареники с картошкой и жареным луком (12 €), домашние соленья, блины, а на десерт сырники или медовик."])}]}
+                  "Для первого раза — пельмени ручной лепки (13 €) и бефстроганов с пюре (17 €). На закуску шуба, а на десерт медовик 🍯","És arengada sota capes de patata, pastanaga i remolatxa: com una ensaladilla russa en pastís, dolça i salada alhora. Per començar et recomano pelmeni (13 €), que són com raviolis de carn, i medovik de postres 🍯"])}]},
+      {label:{es:"Somos 18 para un cumpleaños",en:"We're 18 for a birthday",ru:"Нас 18 на день рождения",ca:"Som 18 per a un aniversari"},
+       steps:l=>[{u:tr(l,["Somos 18 personas para un cumpleaños, ¿se puede?","We're 18 people for a birthday, is that possible?","Нас 18 человек на день рождения, можно?","Som 18 persones per a un aniversari, es pot?"])},
+         {b:tr(l,["¡Claro! Para 18 montamos mesa larga con zakuski para compartir y principal a elegir, desde 32 € por persona. ¿Tu nombre y la fecha?","Of course! For 18 we set a long table with zakuski to share and a choice of main, from €32 per person. Can I have your name and the date?","Конечно! Для 18 гостей накроем длинный стол: закуски, горячее на выбор, от 32 € с человека. Как вас зовут и на какую дату?","És clar! Per a 18 muntem taula llarga amb zakuski per compartir i principal a triar, des de 32 € per persona. El teu nom i la data?"])},
+         {u:tr(l,["Marta, el sábado 13 de diciembre","Tom, Saturday 13 December","Ирина, суббота 13 декабря","Marta, dissabte 13 de desembre"])},
+         {tool:"event_request",args:{name:tr(l,["Marta","Tom","Ирина","Marta"]),people:18,occasion:tr(l,["cumpleaños","birthday","день рождения","aniversari"]),date:"13/12"}},
+         {b:tr(l,["Apuntado, Marta. El encargado te escribe en menos de 24 h con el menú y el precio final 🎉","Got it, Tom. Our manager will message you within 24 hours with the menu and final price 🎉","Записала, Ирина. Менеджер напишет в течение 24 часов с меню и итоговой ценой 🎉","Apuntat, Marta. L'encarregat t'escriu en menys de 24 h amb el menú i el preu final 🎉"])}]},
+      {label:{es:"¿Tenéis platos vegetarianos?",en:"Any vegetarian dishes?",ru:"Есть вегетарианское?",ca:"Teniu plats vegetarians?"},
+       steps:l=>[{u:tr(l,["¿Tenéis platos vegetarianos?","Do you have vegetarian dishes?","Есть вегетарианские блюда?","Teniu plats vegetarians?"])},
+         {b:tr(l,["Sí: vareniki de patata con cebolla frita (12 €), encurtidos de la casa, blinis y de postre syrniki o medovik. Avísanos al reservar y lo preparamos con cariño.","Yes: potato vareniki with fried onion (€12), house pickles, blini, and syrniki or medovik for dessert. Mention it when you book and we'll look after you.","Да: вареники с картошкой и жареным луком (12 €), домашние соленья, блины, а на десерт сырники или медовик.","Sí: vareniki de patata amb ceba fregida (12 €), encurtits de la casa, blinis i de postres syrniki o medovik. Avisa'ns quan reservis i ho preparem amb carinyo."])}]}
     ]
   };
 })();

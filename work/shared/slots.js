@@ -5,7 +5,7 @@ window.Slots=(function(){
   const toMin=s=>{const m=/^(\d{1,2})[:.h]?(\d{2})?/.exec(String(s||"").trim());return m?(+m[1])*60+(+(m[2]||0)):NaN;};
   const fmt=m=>pad(Math.floor(m/60))+":"+pad(m%60);
   const dateOf=s=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s||"").trim());return m?new Date(+m[1],+m[2]-1,+m[3],12):null;};
-  const LOC={es:"es-ES",en:"en-GB",ru:"ru-RU"};
+  const LOC={es:"es-ES",en:"en-GB",ru:"ru-RU",ca:"ca-ES"};
   const RU_ACC=["воскресенье","понедельник","вторник","среду","четверг","пятницу","субботу"];
   const weekday=(d,l)=>l==="ru"?RU_ACC[d.getDay()]:d.toLocaleDateString(LOC[l]||"en-GB",{weekday:"long"});
   const nice=(d,l)=>d.toLocaleDateString(LOC[l]||"en-GB",{weekday:"short",day:"numeric",month:"short"});
