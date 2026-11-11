@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta name="robots" content="noindex">
 <meta charset="utf-8">
+<meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Vitrina Studio · Webs para negocios locales</title>
 <meta name="description" content="Webs editoriales en español, inglés y ruso para negocios locales en España, con asistente de IA para reservas y WhatsApp. Lista en 7 días a precio cerrado.">
@@ -44,6 +44,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{overflow-x:clip}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--f-b);overflow-x:clip;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -92,6 +93,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;op
 .btn:hover .arr{transform:translateX(4px) rotate(-45deg)}
 .top .btn{height:40px;padding:0 16px;font-size:14px}
 @media (max-width:1020px){.nav,.clock{display:none}.top .w{gap:12px}.langs{margin-left:auto}}
+@media (max-width:480px){.langs button{padding:7px 6px;letter-spacing:.02em}.top .w{gap:8px}}
 @media (max-width:520px){.top .btn{display:none}}
 
 /* intro curtain */
@@ -401,7 +403,7 @@ fieldset{border:0;margin:0;padding:0}
       <a href="#work" data-i="nWork"></a><a href="#ai" data-i="nAI"></a><a href="#services" data-i="nServices"></a><a href="#process" data-i="nProcess"></a><a href="#faq" data-i="nFaq"></a>
     </nav>
     <span class="clock" id="clock"><i></i>BCN --:--</span>
-    <div class="langs" role="group" aria-label="Language"><button data-lang="es">ES</button><button data-lang="en">EN</button><button data-lang="ru">RU</button></div>
+    <div class="langs" role="group" aria-label="Language"><button data-lang="es">ES</button><button data-lang="ca">CA</button><button data-lang="en">EN</button><button data-lang="ru">RU</button></div>
     <a class="btn solid" href="#contact"><span data-i="nQuote"></span><span class="arr">→</span></a>
   </div>
 </header>
@@ -691,6 +693,128 @@ const T = {
   foot1:["© 2026 Vitrina Studio · Web studio · Spain","© 2026 Vitrina Studio · Estudio web · España","© 2026 Vitrina Studio · Веб-студия · Испания"],
   foot2:["riffsking@gmail.com · WhatsApp +34 692 808 027 · The projects shown are concepts made for this portfolio.","riffsking@gmail.com · WhatsApp +34 692 808 027 · Los proyectos mostrados son conceptos creados para este portfolio.","riffsking@gmail.com · WhatsApp +34 692 808 027 · Показанные проекты являются концептами для этого портфолио."]
 };
+/* Catalan (added 2026-11-11). Applied as language index 3 in home.tpl.html; any key missing here falls back to Spanish. */
+const CA = {
+  nWork:"Treballs", nServices:"Serveis", nProcess:"Procés", nFaq:"Preguntes", nQuote:"Demana pressupost",
+  eyebrow:"Estudi web · Espanya",
+  nAI:"Assistent IA",
+  h1a:"Webs que fan que el teu negoci sigui més fàcil de portar i",
+  h1b:"més rendible.",
+  lede:"Reserves, WhatsApp, Google Maps i preus integrats, perquè els clients et trobin, confiïn en tu i t'escriguin. Llesta en 7 dies i a preu tancat.",
+  aiK:"Pack prèmium",
+  aiT:"Un assistent que atén els teus clients per tu",
+  aiS:"Respon en segons, de dia i de nit, en l'idioma del client. Tu només hi intervens quan cal.",
+  ai1:"Respon a WhatsApp, Instagram i al xat de la web 24/7",
+  ai2:"Agenda cites directament al teu calendari",
+  ai3:"Desa cada contacte en un CRM senzill",
+  ai4:"Envia recordatoris i seguiments tot sol",
+  ai5:"Prepara 3 publicacions a la setmana perquè les aprovis",
+  ai6:"Parla espanyol, anglès i rus",
+  aiP1L:"Posada en marxa", aiP1:"des de 990 €",
+  aiP2L:"Després", aiP2:"149 €/mes",
+  aiNote:"Inclou un informe mensual amb les preguntes respostes, les reserves fetes i les hores estalviades. Les tarifes de missatgeria i de plataforma per al volum normal d'un negoci petit hi són incloses.",
+  aiCta:"Pregunta pel pack IA",
+  aiLive:"Prova la demo en directe",
+  chSub:"Assistent IA · en línia", chDay:"Avui", chIn:"Missatge",
+  m1:"Hola! Teniu taula per a 4 aquesta nit cap a les 9?",
+  m2:"Hola! Sí, a les 21:00 per a 4 hi ha lloc. La reservo a nom teu?",
+  m3:"Sí, si us plau. Anna",
+  m4:"Fet ✅ Taula per a 4 a les 21:00 a nom de l'Anna. T'envio un recordatori a les 19:00. Fins aquesta nit!",
+  crmT:"Contacte nou · al CRM",
+  crmName:"Nom", crmNameV:"Anna", crmCh:"Canal",
+  crmBook:"Reserva", crmBookV:"Avui 21:00 · 4 persones",
+  crmLang:"Idioma", crmLangV:"Català",
+  o4:"Assistent IA",
+  cta1:"Veure treballs",
+  fDelivery:"Lliurament", fDeliveryV:"7 dies", fFrom:"Des de", fFromV:"390 €", fChanges:"Canvis", fChangesV:"2 rondes",
+  fLang:"Idiomes",
+  lcT:"Cada web disponible en",
+  lcNote:"Textos escrits amb nivell natiu, no passats per un traductor. Turistes, expats i clients del barri s'hi senten com a casa.",
+  ind:"Restaurants|Perruqueries|Gimnasos|Hotels|Clíniques|Immobiliàries|Botigues|Cafeteries",
+  manK:"(01) — La idea",
+  man:"La teva web és el teu aparador {1} a internet. L'obrim en set dies {2}, en tres idiomes, amb fotos que obren la gana {3} i un assistent que respon {4} mentre tu treballes.",
+  workT:"Treballs",
+  workS:"Sis webs concepte, cadascuna amb la seva marca i el seu propi assistent IA. Passa el ratolí per un nom, baixa per la pila i obre qualsevol en directe.",
+  openLive:"Obrir en directe",
+  view:"Obrir",
+  k1L:"Restaurant rus · Concepte",
+  k1D:"La porcellana de xarxa cobalt com a identitat. Una carta que explica cada plat a qui el tasta per primera vegada i un amfitrió que reserva en espanyol, anglès o rus.",
+  k1f1:"Carta que s'explica sola", k1f2:"Reserva de taula", k1f3:"IA de reserves", k1f4:"ES · EN · RU",
+  k2L:"Restaurant de banquets · Concepte",
+  k2D:"Un menjador de teatre: vellut fosc, llautó i set plats estrella. L'assistent pressuposta un banquet al moment, amb total i paga i senyal.",
+  k2f1:"7 plats estrella", k2f2:"Calculadora de banquets", k2f3:"IA de banquets", k2f4:"ES · EN · RU",
+  k3L:"Botiga russa · Concepte",
+  k3D:"Disseny d'etiquetes i preus amb una prestatgeria filtrable. L'assistent respon «el teniu?» i aparta comandes per recollir.",
+  k3f1:"Prestatgeria amb estoc", k3f2:"Caixes regal", k3f3:"IA de botiga", k3f4:"ES · EN · RU",
+  k4L:"Estudi de color · Concepte",
+  k4D:"Editorial de moda on l'únic color és el dels cabells. Selector de tons, preus clars i un conserge que reserva segons la durada del servei.",
+  k4f1:"Selector de tons", k4f2:"Preus i temps", k4f3:"IA de cites", k4f4:"ES · EN · RU",
+  k5L:"Botiga de barri · Concepte",
+  k5D:"Vermell i or de Khokhloma per a una botiga on es troben sis comunitats. L'assistent respon en ucraïnès, georgià o polonès i avisa quan arriba el producte.",
+  k5f1:"Sis prestatgeries", k5f2:"Arribades de la setmana", k5f3:"IA multilingüe", k5f4:"Avisos d'arribada",
+  k6L:"Vermuteria · Concepte editorial",
+  k6D:"Una web amb aire de revista, en la línia de Readymag: tipografia gegant amb un sifó dins del nom, horari en directe i reserves per WhatsApp.",
+  k6f1:"Maquetació editorial", k6f2:"Horari en directe", k6f3:"Reserva per WhatsApp", k6f4:"Català · ES",
+  svcT2:"Preus",
+  svcS:"Preus tancats, acordats abans de començar. Sense facturar per hores ni sorpreses al final.",
+  from:"des de", monthly:"al mes",
+  s1K:"Per a una oferta", s1T:"Landing page", s1P:"390 €",
+  s1D:"Una pàgina que ven una sola cosa: un llançament, una oferta, una carta o un esdeveniment.",
+  s1a:"Disseny a mida, sense plantilles", s1b:"Ràpida i pensada per al mòbil", s1c:"Formulari de contacte o de reserves", s1d:"Llesta en 5 dies",
+  s2K:"La més demanada", s2T:"Web de negoci", s2P:"790 €",
+  s2D:"Una web completa per a la teva botiga, estudi, clínica o restaurant.",
+  s2a:"Fins a 6 pàgines", s2b:"Dos idiomes inclosos", s2c:"Google Maps, ressenyes i botó de WhatsApp", s2d:"SEO local perquè et trobin a la teva zona", s2e:"Llesta en 7 dies",
+  s3K:"Després del llançament", s3T:"Manteniment", s3P:"39 €/mes",
+  s3D:"Hosting, actualitzacions i petits canvis, perquè no t'hi hagis d'amoïnar.",
+  s3a:"Hosting i SSL", s3b:"Fins a 1 hora de canvis al mes", s3c:"Còpia de seguretat mensual", s3d:"Resposta en menys de 24 h",
+  s4K:"Prèmium", s4T:"Web editorial",
+  s4D:"Una web única amb aire de revista, animació i direcció d'art, com el concepte Sifó.",
+  s4a:"Direcció d'art i tipografia a mida", s4b:"Animacions en fer scroll", s4c:"Pla de fotos o fotos seleccionades", s4d:"Llesta en 10–14 dies",
+  extra:"Idioma extra: +90 € per web. El domini el pagues tu directament, uns 10–15 € l'any.",
+  whyT2:"Per què",
+  whyS:"Una sola persona des del primer missatge fins al llançament. Sempre saps qui fa la teva web.",
+  w1T:"Tres idiomes, una sola persona",
+  w1D:"Parlo i escric amb tu en espanyol, anglès o rus, i la teva web pot parlar tots tres.",
+  w2B:"7 dies",
+  w2T:"Aspecte d'agència, preu de freelance",
+  w2D:"La IA fa ràpid la part lenta i jo cuido cada detall a mà. Tens una web d'estudi sense tarifes d'estudi.",
+  w3T:"Tot és teu",
+  w3D:"Domini, arxius i comptes a nom teu. Sense lligams ni sorpreses.",
+  procT2:"7 dies",
+  procS:"Veus un disseny real el dia 3, no un esbós. Inclou dues rondes de canvis.",
+  p1W:"Dia 1", p1T:"Briefing", p1D:"Una xerrada curta sobre el teu negoci, els teus clients i les webs que t'agraden.",
+  p2W:"Dies 2–3", p2T:"Disseny", p2D:"Reps un disseny complet amb els teus textos i fotos reals.",
+  p3W:"Dies 4–6", p3T:"Desenvolupament", p3D:"La construeixo, escric o polo els textos i la provo en mòbils reals.",
+  p4W:"Dia 7", p4T:"Llançament", p4D:"La teva web es publica al teu domini, llesta per rebre clients.",
+  faqT:"Preguntes",
+  q1:"Necessito domini i hosting?",
+  a1:"No. Si no en tens, els configuro a nom teu. Un domini costa uns 10–15 € l'any.",
+  q2:"Qui escriu els textos?",
+  a2:"Jo, si vols. Envia'm el que tinguis, encara que siguin notes soltes, i ho converteixo en textos clars en cada idioma que necessitis.",
+  q3:"Puc canviar coses després?",
+  a3:"Sí. En el llançament s'inclouen dues rondes de canvis. Després, el manteniment cobreix els canvis petits i els grans te'ls pressuposto abans.",
+  q4:"Com es paga?",
+  a4:"50 % en començar i 50 % en el llançament, per transferència o targeta.",
+  q5:"Treballes fora d'Espanya?",
+  a5:"Sí. Tot es fa en línia, així que treballo amb clients de qualsevol lloc.",
+  madeA:"Fet a",
+  talkA:"Hola,", talkB:"parlem.",
+  conT:"Explica'm el teu negoci",
+  conS:"Respon tres preguntes ràpides i et contesto en menys de 24 hores amb un pla i un preu tancat.",
+  or:"O escriu-me directament", copy:"Copiar", copied:"Copiat",
+  lName:"El teu nom", lBiz:"Negoci i ciutat", lType:"Què necessites?",
+  o1:"Landing page", o2:"Web de negoci", o3:"Encara no ho sé", o5:"Web editorial",
+  lMsg:"Alguna cosa més?", phMsg:"La teva web actual, webs que t'agraden, termini…",
+  send:"Enviar sol·licitud",
+  sent:"La teva sol·licitud està llesta. Envia-la com prefereixis:",
+  sendWa:"Enviar per WhatsApp",
+  sendMail:"Enviar per correu",
+  need:"Omple el teu nom i el teu negoci.",
+  foot1:"© 2026 Vitrina Studio · Estudi web · Espanya",
+  foot2:"riffsking@gmail.com · WhatsApp +34 692 808 027 · Els projectes que es mostren són conceptes creats per a aquest portfoli.",
+  foot3:"Les fotos d'ambient d'aquesta pàgina estan generades amb IA."
+};
+
 Object.assign(T, {
   fLang:["Languages","Idiomas","Языки"],
   manK:["(01) — The idea","(01) — La idea","(01) — Идея"],
@@ -717,9 +841,11 @@ Object.assign(T, {
   o5:["Editorial site","Web editorial","Журнальный сайт"],
   foot3:["Atmosphere photos on this page are AI-generated.","Las fotos de ambiente de esta página están generadas con IA.","Атмосферные фото на этой странице созданы ИИ."]
 });
-const IDX = {en:0, es:1, ru:2};
+/* Catalan lives in CA (T.js) and becomes index 3 of every entry */
+Object.keys(CA).forEach(k => { if (T[k]) T[k][3] = CA[k]; else T[k] = ["", "", "", CA[k]]; });
+const IDX = {en:0, es:1, ru:2, ca:3};
 let lang = "es";
-function t(k){ return (T[k]||[])[IDX[lang]] || ""; }
+function t(k){ const v = T[k] || []; return v[IDX[lang]] || v[1] || ""; }
 
 const WORKS = [
   {slug:"sifo", name:"Sifó", em:"Vermutería", url:"sifo.cat", L:"k6L", D:"k6D", f:["k6f1","k6f2","k6f3","k6f4"], c:"#EFE6D4", fg:"#1A1411", a:"#C8331F", sw:["#1A1411","#C8331F","#1F5C3A","#F2C230"], ty:"Bricolage · Instrument Serif", ai:false},
