@@ -1,2 +1,2 @@
-window.AI_PHOTOS=7;
+window.AI_PHOTOS=15;
 window.CREDITS=[];

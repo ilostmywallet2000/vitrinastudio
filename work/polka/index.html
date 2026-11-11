@@ -48,20 +48,13 @@ nav{display:flex;gap:24px;font-weight:500;font-size:15px}nav a{text-decoration:n
 .origins{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
 .origins span{border:1.5px solid var(--ink);border-radius:99px;padding:7px 13px;font:500 12.5px/1 var(--f-m)}
 
-/* drawn shelf */
-.shelfart{background:var(--shelf);border-radius:28px;padding:34px 26px 0;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden}
-.row{display:flex;align-items:flex-end;justify-content:center;gap:12px;padding:0 6px;min-height:180px;border-bottom:14px solid #C9B48F;position:relative}
-.row+.row{margin-top:30px}
-.p{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;font:800 11px/1.05 var(--f-d);color:#fff;letter-spacing:.02em;box-shadow:inset -8px 0 0 rgba(0,0,0,.12)}
-.jar{width:84px;height:110px;border-radius:12px 12px 16px 16px;background:#F7F3EA;color:var(--ink);border:3px solid var(--ink)}
-.jar::before{content:"";position:absolute;top:-16px;left:8px;right:8px;height:16px;background:var(--red);border-radius:6px 6px 0 0}
-.tin{width:78px;height:96px;border-radius:10px;background:linear-gradient(var(--mustard) 0 24%,#1E3A8A 24% 76%,var(--mustard) 76%)}
-.bottle{width:52px;height:166px;border-radius:24px 24px 10px 10px/40px 40px 10px 10px;background:#2F6B4F}
-.bottle::before{content:"";position:absolute;top:-18px;width:22px;height:22px;background:#2F6B4F;border-radius:4px}
-.box{width:110px;height:84px;border-radius:6px;background:var(--red)}
-.box.y{background:var(--mustard);color:var(--ink);width:90px;height:130px}
-.bag{width:96px;height:140px;border-radius:14px 14px 8px 8px;background:#F7F3EA;color:var(--ink);border:3px solid var(--ink);clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)}
-.price{position:absolute;bottom:-46px;left:50%;transform:translateX(-50%);background:#fff;border:1.5px solid var(--ink);font:500 11px/1 var(--f-m);padding:5px 7px;border-radius:4px;color:var(--ink);white-space:nowrap;box-shadow:none}
+/* shelf of product photos */
+.shelfart{background:var(--shelf);border-radius:28px;padding:30px 22px 0;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.row{display:flex;align-items:flex-end;justify-content:center;gap:12px;padding:0 6px;min-height:170px;border-bottom:14px solid #C9B48F;position:relative}
+.row+.row{margin-top:58px}
+.p{position:relative;margin:0;width:104px;height:124px;border-radius:12px;background:#fff var(--img) var(--x,50%) 62%/cover no-repeat;border:4px solid #fff;box-shadow:0 14px 26px -14px rgba(20,33,61,.45),0 0 0 1px var(--line)}
+.row .p:nth-child(odd){height:138px}
+.price{position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);background:#fff;border:1.5px solid var(--ink);font:500 11px/1 var(--f-m);padding:5px 7px;border-radius:4px;color:var(--ink);white-space:nowrap}
 @media (max-width:520px){.p.hide-s{display:none}}
 
 section{padding-block:96px}
@@ -138,16 +131,16 @@ footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     </div>
     <div class="shelfart" aria-hidden="true">
       <div class="row">
-        <div class="p jar">TVOROG<br>9%<span class="price">3,90 €</span></div>
-        <div class="p tin">СГУЩЁНКА<span class="price">2,80 €</span></div>
-        <div class="p bottle hide-s"><span class="price">1,95 €</span></div>
-        <div class="p box">ПРЯНИКИ<span class="price">3,50 €</span></div>
+        <figure class="p" style="--img:url(photos/tvorog.jpg)"><span class="price">3,90 €</span></figure>
+        <figure class="p" style="--img:url(photos/condensed.jpg)"><span class="price">2,80 €</span></figure>
+        <figure class="p hide-s" style="--img:url(photos/borjomi.jpg);--x:50%"><span class="price">1,95 €</span></figure>
+        <figure class="p" style="--img:url(photos/pryaniki.jpg)"><span class="price">3,50 €</span></figure>
       </div>
       <div class="row">
-        <div class="p bag">ГРЕЧКА<br>900 g<span class="price">3,20 €</span></div>
-        <div class="p box y">ПЕЛЬМЕНИ<br>1 kg<span class="price">8,90 €</span></div>
-        <div class="p jar hide-s">KEFIR<span class="price">2,40 €</span></div>
-        <div class="p tin">ШПРОТЫ<span class="price">3,60 €</span></div>
+        <figure class="p" style="--img:url(photos/buckwheat.jpg)"><span class="price">3,20 €</span></figure>
+        <figure class="p" style="--img:url(photos/pelmeni.jpg)"><span class="price">8,90 €</span></figure>
+        <figure class="p hide-s" style="--img:url(photos/kefir.jpg)"><span class="price">2,40 €</span></figure>
+        <figure class="p" style="--img:url(photos/shprot.jpg)"><span class="price">3,60 €</span></figure>
       </div>
       <div style="height:46px"></div>
     </div>
@@ -225,7 +218,7 @@ function render(){const l=document.documentElement.lang;
   const g=document.getElementById("grid");g.textContent="";P.filter(p=>f==="fAll"||p[0]===f).forEach(([c,es,ru,o,pr,s,bg,fg])=>{
     const a=document.createElement("article");a.className="item";
     a.innerHTML='<div class="sw"></div><span class="o"></span><h3></h3><div class="bt"><span class="pr"></span><span class="st"></span></div>';
-    const sw=a.querySelector(".sw");const ph={"Творог 9%":"tvorog","Гречка 900 г":"buckwheat","Сгущёнка":"condensed","Тульский пряник":"pryaniki","Квас 1,5 л":"kvass","Пельмени сибирские 1 кг":"pelmeni"}[ru];
+    const sw=a.querySelector(".sw");const ph={"Творог 9%":"tvorog","Гречка 900 г":"buckwheat","Сгущёнка":"condensed","Тульский пряник":"pryaniki","Квас 1,5 л":"kvass","Пельмени сибирские 1 кг":"pelmeni","Сметана 20%":"smetana","Кефир":"kefir","Вареники с вишней":"vareniki","Шпроты в масле":"shprot","Армянский лаваш":"lavash","Шоколад «Алёнка»":"chocolate","Боржоми":"borjomi","Коньяк «Арарат»":"brandy"}[ru];
     sw.style.background=ph?"url(photos/"+ph+".jpg)":bg;sw.style.color=fg;sw.textContent=ru.toUpperCase();if(ph){sw.classList.add("ph");sw.setAttribute("role","img");sw.setAttribute("aria-label",ru);}else if(bg==="#FFFFFF")sw.style.border="1.5px solid #E1DED4";
     a.querySelector(".o").textContent=o+" · "+T[c][l];a.querySelector("h3").textContent=l==="ru"?ru:es;a.querySelector(".pr").textContent=pr.toFixed(2).replace(".",",")+" €";
     const st=a.querySelector(".st");st.className="st "+(s==="in"?"in":s==="lo"?"lo":"fr");st.textContent=T[s==="in"?"sIn":s==="lo"?"sLo":"sFr"][l];g.append(a);});
